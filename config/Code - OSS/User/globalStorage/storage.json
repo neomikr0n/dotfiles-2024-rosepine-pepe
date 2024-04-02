@@ -100,6 +100,17 @@
                                     "id": "openRecentFile",
                                     "uri": {
                                         "$mid": 1,
+                                        "external": "file:///run/media/n30/nvme_chivos/.dotfiles/.gitignore",
+                                        "path": "/run/media/n30/nvme_chivos/.dotfiles/.gitignore",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "/run/media/n30/nvme_chivos/.dotfiles/.gitignore"
+                                },
+                                {
+                                    "id": "openRecentFile",
+                                    "uri": {
+                                        "$mid": 1,
                                         "external": "file:///run/media/n30/nvme_chivos/SteamLibrary/steamapps/common/Pawpaw/Documents/Readme_EN.txt",
                                         "path": "/run/media/n30/nvme_chivos/SteamLibrary/steamapps/common/Pawpaw/Documents/Readme_EN.txt",
                                         "scheme": "file"
@@ -832,8 +843,7 @@
                     },
                     {
                         "id": "editor.action.toggleWordWrap",
-                        "label": "&&Word Wrap",
-                        "checked": true
+                        "label": "&&Word Wrap"
                     }
                 ]
             },
