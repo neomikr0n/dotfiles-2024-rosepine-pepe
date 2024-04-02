@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+command=$1
+show=false
+increment=""
+
+# Check if the command is valid
+if ! [[ "$command" =~ ^(up|down|togglemute|mute|unmute|settings|startup|kill)$ ]]; then
+    echo "Invalid command: $command. Must be 'up', 'down', 'togglemute', 'mute', 'unmute', 'settings', 'startup', or 'kill'."
+    exit 1
+fi
+
+shift
+
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+while getopts "sv:" opt; do
+    case "$opt" in
+    v)  value=$OPTARG
+        # Check if the value is an integer between 1 and 100
+       if ! [[ "$value" =~ ^[1-9][0-9]{0,1}$ ]] || ((value > 100)); then
+        echo "must be an integer where 1<=x<=100"
+            exit 1
+        else
+            if [ "$command" == "up" ]; then
+                increment=$value
+            fi
+            if [ "$command" == "down" ]; then
+                increment=-$value
+            fi
+        fi
+        ;;
+    s) show=true
+        ;;
+    *) echo "Invalid option: -$OPTARG" >&2
+        exit 1
+        ;;
+    esac
+done
+
+shift $((OPTIND-1))
+echo "command=$command, show=$show, value='$value', increment=$increment, Leftovers: $@"
+
+if [ "$command" == 'up' ]; then
+  if [ "$increment" == "" ]; then
+    pactl set-sink-volume @DEFAULT_SINK@ +1%
+  else
+    pactl set-sink-volume @DEFAULT_SINK@ +"$increment"%
+  fi
+elif [ "$command" == 'down' ]; then
+  if [ "$increment" == "" ]; then
+    pactl set-sink-volume @DEFAULT_SINK@ -1%
+  else
+    echo set-sink-volume @DEFAULT_SINK@ "$increment"%
+    pactl set-sink-volume @DEFAULT_SINK@ "$increment"%
+  fi
+elif [ "$command" == 'togglemute' ]; then
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+elif [ "$command" == 'mute' ]; then
+    pactl set-sink-mute @DEFAULT_SINK@ 1
+elif [ "$command" == 'unmute' ]; then
+    pactl set-sink-mute @DEFAULT_SINK@ 0
+elif [ "$command" == 'settings' ]; then
+    pavucontrol || pavucontrol-qt
+elif [ "$command" == 'startup' ]; then # isn't used in this config, just here as reference
+    rm -f "${XDG_RUNTIME_DIR}/wob.sock" && mkfifo "${XDG_RUNTIME_DIR}/wob.sock" && tail -f "${XDG_RUNTIME_DIR}/wob.sock" | wob
+elif [ "$command" == 'kill' ]; then # run when wob is no longer needed
+    pkill wob
+fi
+
+if [ "$show" != false ]; then
+    volume_amount="$(pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}')"
+    # background_color='#000000FF'
+    # border_color='#FFFFFFCD'
+    # bar_color='#E8E8E8D4'
+    # if muted, change the background color to red
+    # [ "$(pactl get-sink-mute @DEFAULT_SINK@ | awk '{print $2}')" == 'yes' ] && background_color='FF000088'
+    # echo to the sock file what to show
+    # <value> or
+    # <value> <#background_color> <#border_color> <#bar_color>
+    # echo "${volume_amount} ${background_color} ${border_color} ${bar_color}"
+    echo "$volume_amount" > "${XDG_RUNTIME_DIR}/wob.sock"
+fi

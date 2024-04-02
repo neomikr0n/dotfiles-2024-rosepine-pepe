@@ -1,0 +1,41 @@
+2024-03-19 16:15:07.920 [info] Extension host with pid 2389 started
+2024-03-19 16:15:07.920 [info] Skipping acquiring lock for /home/n30/.config/Code/User/workspaceStorage/ce82f6cc5b8f3bff4d642450f5af7137.
+2024-03-19 16:15:08.023 [info] ExtensionService#_doActivateExtension mechatroner.rainbow-csv, startup: false, activationEvent: 'onLanguage:plaintext'
+2024-03-19 16:15:08.029 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-03-19 16:15:08.033 [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:markdown'
+2024-03-19 16:15:08.035 [info] ExtensionService#_doActivateExtension vscode.markdown-language-features, startup: false, activationEvent: 'onLanguage:markdown'
+2024-03-19 16:15:08.057 [info] ExtensionService#_doActivateExtension shd101wyy.markdown-preview-enhanced, startup: false, activationEvent: 'onLanguage:markdown'
+2024-03-19 16:15:08.258 [info] ExtensionService#_doActivateExtension yzhang.markdown-all-in-one, startup: false, activationEvent: 'onLanguage:markdown'
+2024-03-19 16:15:08.325 [info] ExtensionService#_doActivateExtension vscode.markdown-math, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-19 16:15:08.338 [info] ExtensionService#_doActivateExtension bierner.markdown-checkbox, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-19 16:15:08.346 [info] ExtensionService#_doActivateExtension bierner.markdown-emoji, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-19 16:15:08.393 [info] ExtensionService#_doActivateExtension bierner.markdown-footnotes, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-19 16:15:08.396 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2024-03-19 16:15:08.412 [info] ExtensionService#_doActivateExtension bierner.markdown-mermaid, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-19 16:15:08.420 [info] ExtensionService#_doActivateExtension bierner.markdown-preview-github-styles, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-19 16:15:08.432 [info] ExtensionService#_doActivateExtension bierner.markdown-yaml-preamble, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-19 16:15:08.967 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2024-03-19 16:15:08.968 [info] ExtensionService#_doActivateExtension mdickin.markdown-shortcuts, startup: true, activationEvent: '*'
+2024-03-19 16:15:09.024 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2024-03-19 16:15:09.037 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-03-19 16:15:09.057 [info] Eager extensions activated
+2024-03-19 16:15:09.069 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-03-19 16:15:09.070 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-03-19 16:15:09.072 [info] ExtensionService#_doActivateExtension Catppuccin.catppuccin-vsc, startup: false, activationEvent: 'onStartupFinished'
+2024-03-19 16:15:09.074 [info] ExtensionService#_doActivateExtension CS50.markdown50, startup: false, activationEvent: 'onStartupFinished'
+2024-03-19 16:15:09.119 [info] ExtensionService#_doActivateExtension ecmel.vscode-html-css, startup: false, activationEvent: 'onStartupFinished'
+2024-03-19 16:15:09.120 [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode, startup: false, activationEvent: 'onStartupFinished'
+2024-03-19 16:15:09.135 [info] ExtensionService#_doActivateExtension zhuangtongfa.material-theme, startup: false, activationEvent: 'onStartupFinished'
+2024-03-19 16:15:09.214 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2024-03-19 16:15:09.222 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2024-03-19 16:15:09.256 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2480
+2024-03-19 16:15:09.391 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2481
+2024-03-19 16:15:12.048 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2479
+2024-03-19 16:15:17.106 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2472
+2024-03-19 16:15:27.719 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2472
+2024-03-19 16:15:32.317 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2451
+2024-03-19 16:15:37.372 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2451
+2024-03-19 16:15:42.422 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2451
+2024-03-19 16:15:50.539 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2451
+2024-03-19 16:17:11.717 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2451
+2024-03-19 16:17:18.604 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2451

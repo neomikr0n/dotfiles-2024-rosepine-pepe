@@ -1,0 +1,10 @@
+2024-03-17 09:02:32.401 [info] update#setState idle
+2024-03-17 09:02:33.352 [error] update#isLatestVersion(): failed to check for updates
+2024-03-17 09:02:33.353 [error] Error: net::ERR_ADDRESS_UNREACHABLE
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:110219)
+    at SimpleURLLoaderWrapper.emit (node:events:514:28)
+2024-03-17 09:03:01.929 [info] update#setState checking for updates
+2024-03-17 09:03:01.932 [info] update#setState available for download
+2024-03-17 22:02:36.108 [error] [UtilityProcessWorker]: terminated unexpectedly with code 15, signal: unknown
+2024-03-17 22:02:36.109 [error] [UtilityProcess id: 1, type: fileWatcher, pid: 2254]: crashed with code 15 and reason 'killed'
+2024-03-17 22:02:36.121 [error] CodeWindow: renderer process gone (reason: clean-exit, code: <unknown>)

@@ -1,0 +1,6 @@
+{
+    "device": "alsa_output.usb-Topping_DX3_Pro_-00.analog-stereo",
+    "device-description": "DX3 Pro+ Analog Stereo",
+    "device-profile": "analog-output",
+    "preset-name": "XS_bass"
+}

@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# ░█▀▀▄░█▀▀░▄▀▀▄░█▀▄▀█░░▀░░█░▄░█▀▀▄░█▀▀█░█▀▀▄░░   # BETA
+# ░█░▒█░█▀▀░█░░█░█░▀░█░░█▀░█▀▄░█▄▄▀░█▄▀█░█░▒█░░   changing parametric eq
+# ░▀░░▀░▀▀▀░░▀▀░░▀░░▒▀░▀▀▀░▀░▀░▀░▀▀░█▄▄█░▀░░▀░░
+
+# VARIABLES:
+# whatdateisit=$(date +%Y-%m-%d-%H-%M%S)
+
+# GLOBAL FUNCTIONS:
+notification() { # Displays a message
+  h="99"    # lenght of the bar of the notification
+  t="1900"   # how many miliseconds the notification is shown
+  icon="/usr/share/icons/BeautyLine/preferences/scalable/preferences-desktop-notification-bell.svg"
+
+    notify-send --app-name eq -t $t -e -h int:value:$h \
+    -u 'normal' \
+    -i $icon \
+    "$message";
+}
+
+# LOCAL FUNCTIONS:
+Bocinas() {
+  easyeffects -l Bocinas
+  message="         BOCINAS "
+  notification
+}
+XS_bass() {
+  easyeffects -l XS_bass
+  message="         🎧 XS bASS 🎧"
+  notification
+}
+HE400SE_bass() {
+  easyeffects -l HE400SE_bass
+  message="         🎧 HIFIMAN HE400SE bASS 🎧"
+  notification
+}
+HE400SE_oratory() {
+  easyeffects -l HE400SE_oratory
+  message="         🎧 HIFIMAN HE400SE ORATORY  🎧"
+  notification
+}
+SONY1000xm2_bass() {
+  easyeffects -l SONY1000xm2_bass
+  message="         🎧 SONY 1000XM2 bASS  🎧"
+  notification
+}
+XM5() {
+  easyeffects -l XM5
+  message="         🎧 SONY Xm5 bASS  🎧"
+  notification
+}
+
+# Execute functions accordingly
+if [[ "$1" == "--Bocinas" ]]; then
+  Bocinas
+elif [[ "$1" == "--HE400SE_bass" ]]; then
+  HE400SE_bass
+elif [[ "$1" == "--HE400SE_oratory" ]]; then
+  HE400SE_oratory
+elif [[ "$1" == "--XS_bass" ]]; then
+  XS_bass
+elif [[ "$1" == "--XM5" ]]; then
+  XM5
+elif [[ "$1" == "--SONY1000xm2_bass" ]]; then
+  SONY1000xm2_bass
+elif [[ "$1" == "--suspend" ]]; then
+  suspend
+elif [[ "$1" == "--logout" ]]; then
+  logout
+elif [[ "$1" == "--lock" ]]; then
+  lock
+fi
+
+# TODO: 
+  # alternative icons for notify-send:
+    # icon="/usr/share/icons/Adwaita/512x512/emblems/emblem-unreadable.png"
+    # icon="/usr/share/icons/candy-icons/apps/scalable/zen-icon.svg"
+    # icon="/usr/share/icons/BeautyLine/preferences/scalable/preferences-system-login.svg"
+  # cancel button instead of "escape" key?...
+    # -A cancel \   
+  
+

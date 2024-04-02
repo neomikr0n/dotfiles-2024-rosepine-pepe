@@ -1,0 +1,24 @@
+#!/bin/bash
+export NNN_FIFO="$(mktemp --suffix=_nnn)"
+export NNN_PLUG='p:preview'
+
+preview() {
+    while read -r line; do
+        case "$line" in
+            "p"*)
+                FILE_PATH="${line:1}"
+                # Set the required environment variables for the preview script
+                export NNN_PREVIEW_WIDTH="$(tput cols)"
+                export NNN_PREVIEW_HEIGHT="$(tput lines)"
+                export NNN_PREVIEW_X=0
+                export NNN_PREVIEW_Y=0
+                # Call the preview script
+                /home/xfo/bin/nnn_preview
+                ;;
+        esac
+    done < "$NNN_FIFO"
+}
+
+preview &
+nnn
+rm "$NNN_FIFO"

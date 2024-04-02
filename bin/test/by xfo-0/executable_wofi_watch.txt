@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -x
+
+main_dir="/run/media/n30/chivos_4t/Downloads/"
+
+subdirs=$(fd "$main_dir" -maxdepth 1 -type d)
+selected_subdir=$(echo "$subdirs" | wofi --dmenu )
+
+if [ "$directory" = "films" ]; then
+
+    files=$(fd "$selected_subdir" -type f)
+    selected_file=$(echo "$files" | wofi --dmenu -p "Select a file: ")
+    # TODO:
+    # tmux new-session -d vlc ~/Videos/series/Derek/Derek\ Season\ 1/\[S01.E04\]\ Derek\ -\ Episode\ 4.mp4
+else
+    series=$(fd "$selected_subdir" -maxdepth 1 -type d)
+    selected_series=$(echo "$series" | wofi --dmenu -p "series" )
+
+    exec vlc "$selected_file"
+fi

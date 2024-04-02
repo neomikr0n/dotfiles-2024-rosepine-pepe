@@ -1,0 +1,25 @@
+#!/bin/bash
+# ░█▀▀▄░█▀▀░▄▀▀▄░█▀▄▀█░░▀░░█░▄░█▀▀▄░█▀▀█░█▀▀▄░░   v 0.1 ALPHA
+# ░█░▒█░█▀▀░█░░█░█░▀░█░░█▀░█▀▄░█▄▄▀░█▄▀█░█░▒█░░   launching Path of exile
+# ░▀░░▀░▀▀▀░░▀▀░░▀░░▒▀░▀▀▀░▀░▀░▀░▀▀░█▄▄█░▀░░▀░░   on Hyprland linux
+
+# bind for Hyprland.conf:
+# bind=KEY_CAPSLOCK,p, exec, $scriptsDir/poe-launcher   
+
+killall mpvpaper
+hyprctl dispatch exec [workspace special silent] PathOfBuildingCommunity
+hyprctl dispatch -- exec [workspace special silent] brave --profile-directory=poe
+hyprctl dispatch -- exec [workspace 4 silent] kitty --title "poe1"
+# hyprctl dispatch -- exec [workspace 4 silent] kitty --title "poe2"
+hyprctl dispatch -- exec [workspace 4 silent] steam steam://rungameid/238960
+hyprctl dispatch -- exec [workspace 4 silent] awakened-poe-trade
+
+# gamescope -W 3440 -H 1440 -f -e -- mangohud %command%
+# hyprctl dispatch -- exec [workspace 4 silent] gamescope -w 3440 -h 1440 -f -r 144 -- steam steam://rungameid/238960
+# hyprctl dispatch -- exec [workspace 4 silent] gamescope -w 3440 -h 1440 -f -r 144 -- awakened-poe-trade
+
+
+hyprctl notify -1 10000 "rgb(ff1ea3)" "Path of Exile rulez!!!!"
+# bash /home/n30/.dotfiles/bin/misc --glava
+# kitty -T kitty-lol -e glava & nohup
+# vblankmanager: write failed: Resource temporarily unavailable

@@ -1,0 +1,7 @@
+2024-03-20 14:47:33.959 [info] update#setState idle
+2024-03-20 14:47:35.983 [error] update#isLatestVersion(): failed to check for updates
+2024-03-20 14:47:35.983 [error] Error: net::ERR_NETWORK_CHANGED
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:110219)
+    at SimpleURLLoaderWrapper.emit (node:events:514:28)
+2024-03-20 14:48:01.985 [info] update#setState checking for updates
+2024-03-20 14:48:01.998 [info] update#setState available for download

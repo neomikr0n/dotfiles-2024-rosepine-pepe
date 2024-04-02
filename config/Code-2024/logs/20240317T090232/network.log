@@ -1,0 +1,3 @@
+2024-03-17 09:02:33.121 [error] electron #1: https://az764295.vo.msecnd.net/extensions/marketplace.json - error GET net::ERR_NAME_NOT_RESOLVED
+2024-03-17 09:02:33.352 [error] electron #2: https://update.code.visualstudio.com/api/update/linux-x64/stable/903b1e9d8990623e3d7da1df3d33db3e42d80eda - error undefined net::ERR_ADDRESS_UNREACHABLE
+2024-03-17 09:02:33.806 [error] electron #3: https://vscode-sync.trafficmanager.net/v1/manifest - error GET net::ERR_NAME_NOT_RESOLVED

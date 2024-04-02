@@ -1,0 +1,64 @@
+2024-03-14 14:33:35.759 [info] Extension host with pid 2289 started
+2024-03-14 14:33:35.759 [info] Skipping acquiring lock for /home/n30/.config/Code/User/workspaceStorage/ce82f6cc5b8f3bff4d642450f5af7137.
+2024-03-14 14:33:35.881 [info] ExtensionService#_doActivateExtension mechatroner.rainbow-csv, startup: false, activationEvent: 'onLanguage:plaintext'
+2024-03-14 14:33:35.884 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-03-14 14:33:35.887 [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:markdown'
+2024-03-14 14:33:35.890 [info] ExtensionService#_doActivateExtension vscode.markdown-language-features, startup: false, activationEvent: 'onLanguage:markdown'
+2024-03-14 14:33:35.908 [info] ExtensionService#_doActivateExtension shd101wyy.markdown-preview-enhanced, startup: false, activationEvent: 'onLanguage:markdown'
+2024-03-14 14:33:36.107 [info] ExtensionService#_doActivateExtension yzhang.markdown-all-in-one, startup: false, activationEvent: 'onLanguage:markdown'
+2024-03-14 14:33:36.179 [info] ExtensionService#_doActivateExtension vscode.markdown-math, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-14 14:33:36.214 [info] ExtensionService#_doActivateExtension bierner.markdown-checkbox, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-14 14:33:36.225 [info] ExtensionService#_doActivateExtension bierner.markdown-emoji, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-14 14:33:36.229 [info] ExtensionService#_doActivateExtension bierner.markdown-footnotes, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-14 14:33:36.234 [info] ExtensionService#_doActivateExtension bierner.markdown-mermaid, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-14 14:33:36.238 [info] ExtensionService#_doActivateExtension bierner.markdown-preview-github-styles, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-14 14:33:36.279 [info] ExtensionService#_doActivateExtension bierner.markdown-yaml-preamble, startup: false, activationEvent: 'api', root cause: yzhang.markdown-all-in-one
+2024-03-14 14:33:36.282 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2024-03-14 14:33:36.789 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2024-03-14 14:33:36.790 [info] ExtensionService#_doActivateExtension mdickin.markdown-shortcuts, startup: true, activationEvent: '*'
+2024-03-14 14:33:36.855 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2024-03-14 14:33:36.866 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-03-14 14:33:36.883 [info] Eager extensions activated
+2024-03-14 14:33:36.890 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-03-14 14:33:36.891 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-03-14 14:33:36.894 [info] ExtensionService#_doActivateExtension Catppuccin.catppuccin-vsc, startup: false, activationEvent: 'onStartupFinished'
+2024-03-14 14:33:36.896 [info] ExtensionService#_doActivateExtension CS50.markdown50, startup: false, activationEvent: 'onStartupFinished'
+2024-03-14 14:33:36.952 [info] ExtensionService#_doActivateExtension ecmel.vscode-html-css, startup: false, activationEvent: 'onStartupFinished'
+2024-03-14 14:33:36.953 [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode, startup: false, activationEvent: 'onStartupFinished'
+2024-03-14 14:33:36.967 [info] ExtensionService#_doActivateExtension zhuangtongfa.material-theme, startup: false, activationEvent: 'onStartupFinished'
+2024-03-14 14:33:36.993 [info] ExtensionService#_doActivateExtension vscode.json-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2024-03-14 14:33:37.001 [info] ExtensionService#_doActivateExtension vscode.typescript-language-features, startup: false, activationEvent: 'onLanguage:jsonc'
+2024-03-14 14:33:37.106 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2222
+2024-03-14 14:33:37.227 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2223
+2024-03-14 14:33:50.595 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2219
+2024-03-14 14:33:57.913 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2194
+2024-03-14 14:34:08.462 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 14:40:47.686 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 14:48:05.629 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:16:29.531 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:16:34.594 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:16:39.654 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:16:44.716 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:16:49.797 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:16:54.859 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:16:59.916 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:04.986 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:10.054 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:15.136 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:20.189 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:25.259 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:30.317 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:35.389 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:40.482 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:45.548 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:50.613 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:17:55.679 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:18:00.749 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:24:58.676 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:25:03.728 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:25:08.803 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 15:25:13.854 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 17:32:07.804 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 18:23:25.118 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 21:39:28.274 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436
+2024-03-14 21:40:58.261 [warning] [Decorations] CAPPING events from decorations provider vscode.git 2436

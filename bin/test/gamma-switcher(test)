@@ -1,0 +1,71 @@
+#!/bin/bash
+# Define the three gamma temperatures
+temperatures=(6500 4500 2500)
+# Get the current gamma temperature
+current_temperature=$(busctl --user -- get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q)
+# Loop forever
+while :; do
+# Get the key press
+key=$(read -n1)
+
+#If the key is up, increase the gamma temperature
+if [ "key"="Up"];thencurrent 
+temperature=((current_temperature + 1))
+#If the key is down, decrease the gamma temperature
+elif [ "key"="Down"];thencurrent 
+temperature=((current_temperature - 1))
+
+#If the current temperature is out of bounds, wrap around
+if [ ${current_temperature} -gt temperatures[−1]];thencurrent 
+temperature={temperatures[0]}
+elif [ ${current_temperature} -lt temperatures[0]];thencurrent 
+temperature={temperatures[-1]}
+fi
+
+#Set the gamma temperature
+busctl --user -- set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q ${current_temperature}
+done
+
+-------------------------------------------------------------------------------------
+#!/bin/bash
+
+#Define the three gamma temperatures
+temperatures=(6500 4500 2500)
+
+Get the current gamma temperature
+current_temperature=$(busctl --user -- get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q)
+# Define the functions
+function up() {
+current_temperature=$((current_temperature + 1))
+}
+
+function down() {
+current_temperature=$((current_temperature - 1))
+}
+# Loop forever
+while :; do
+# Get the key press
+key=$(read -n1)
+
+#If the key is up, increase the gamma temperature
+if [ "$key" = "Up" ]; then
+up
+
+#If the key is down, decrease the gamma temperature
+elif [ "$key" = "Down" ]; then
+down
+
+#If the current temperature is out of bounds, wrap around
+if [ ${current_temperature} -gt temperatures[−1]];thencurrent 
+temperature={temperatures[0]}
+elif [ ${current_temperature} -lt temperatures[0]];thencurrent 
+temperature={temperatures[-1]}
+fi
+
+#Set the gamma temperature
+busctl --user -- set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q ${current_temperature}
+done
+
+-------------------------------------------------------------------------------------
+# Get the current brightness value
+busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature | awk '{print $2}'

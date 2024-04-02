@@ -1,0 +1,78 @@
+2023-12-02 15:59:47.048 [info] update#setState idle
+2023-12-02 16:00:17.048 [info] update#setState checking for updates
+2023-12-02 16:00:17.134 [info] update#setState idle
+2023-12-02 17:00:17.078 [info] update#setState checking for updates
+2023-12-02 17:00:17.282 [info] update#setState idle
+2023-12-02 18:00:17.107 [info] update#setState checking for updates
+2023-12-02 18:00:17.338 [info] update#setState idle
+2023-12-02 19:00:17.137 [info] update#setState checking for updates
+2023-12-02 19:00:17.411 [info] update#setState idle
+2023-12-02 19:10:47.687 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?),(?,?)). Details: Keys: memento/workbench.parts.editor, memento/workbench.editors.files.textFileEditor Length: 7708
+2023-12-02 19:10:47.760 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:10:52.831 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:11:47.687 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2194
+2023-12-02 19:11:48.340 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:12:47.689 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2192
+2023-12-02 19:12:58.859 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:12:59.020 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:12:59.149 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:12:59.232 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2194
+2023-12-02 19:13:00.965 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:01.348 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:01.421 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2194
+2023-12-02 19:13:01.731 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:01.895 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:02.317 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2192
+2023-12-02 19:13:02.461 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:02.543 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2194
+2023-12-02 19:13:02.663 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:03.061 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:03.172 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2194
+2023-12-02 19:13:03.543 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:03.911 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:03.991 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2192
+2023-12-02 19:13:04.214 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:04.294 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2192
+2023-12-02 19:13:04.415 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:04.665 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:13:04.740 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2192
+2023-12-02 19:14:16.428 [error] Error: Unable to write file '/home/n30/.config/Code/User/globalStorage/storage.json' (Error: Unable to create folder '/home/n30/.config/Code' that already exists but is not a directory)
+    at c.writeFile (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:59:16231)
+    at async g.s (/opt/visual-studio-code/resources/app/out/vs/code/electron-main/main.js:61:8890)
+2023-12-02 19:14:47.691 [error] [storage state.vscdb] prepare(): Error: SQLITE_READONLY_DBMOVED: attempt to write a readonly database (INSERT INTO ItemTable VALUES (?,?)). Details: Keys: memento/workbench.parts.editor Length: 2190

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# COLOR=$(hyprpicker)
+# echo "${COLOR}" | wl-copy -n && 
+
+# hyprpicker -a && (convert -size 32x32 xc:$(wl-paste) /tmp/color.png && notify-send -e "Color Code:" "$(wl-paste)" -h "string:bgcolor:$(wl-paste)" --icon /tmp/color.png -u low -t 4000)
+
+# notify-send -e -u "low" "Color copied!" "$COLOR" # TODO:
+
+hyprpicker -a && (convert -size 32x32 xc:$(wl-paste) /tmp/color.png && notify-send "Color Code:" "$(wl-paste)" -h "string:bgcolor:$(wl-paste)" --icon /tmp/color.png -u critical -t 4000)

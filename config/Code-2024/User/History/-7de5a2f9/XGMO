@@ -1,0 +1,736 @@
+!/usr/bin/env bash
+
+
+# Check if sourced
+! echo "$0" | grep -q "makeme" && echo -e 'makeme should not be sourced!' && exit 1
+
+# Define functions
+function gslr() {
+	if test -n "$1" && test -n "$2" && test -n "$3"; then
+		LII="$(grep -n "$2" "$1" | head -n1 | cut -d : -f1)";
+		if test -n "$LII"; then
+			LI="$(echo -e "$LII" | awk '{print $1}')";
+			sed -i "${LI}s/.*/${3}/" "$1";
+		else
+			RETC=$?
+			echo -e "~ Error [gslr:$RETC], could not find any line containing ${RED}$2${RC}" && return $RETC
+		fi;
+	else
+		if test -z "$1"; then
+			echo -e "~ Error [gslr:3], lack of input" && return 1
+		fi;
+	fi
+};
+
+function handleError ()
+{
+	_errorCode="${2:-$?}"
+	echo -e "Error code ~ ${_errorCode} : $1" && exit ${_errorCode}
+
+};
+
+function build.mkInstaller ()
+{
+	rm -rf "${_buildInstallerOut}"; mkdir -p "${_buildInstallerOut}"
+	local GARCA="${_installerSrc}/packer-engine/garca"
+	rsync -a "${_execDir}/installer/packer-engine/bash" "${_execDir}/installer/packer-engine/busybox" "${_buildCacheInstallerDir}"
+	chmod +x "$GARCA" || exit
+	"$GARCA" a -m0=zstd "$3" -sfx "$1" "$2"
+	return $?
+};
+
+function build.setVars() {
+	# Define variables
+	_execDir="$(dirname "$(readlink -f "$0")")"
+	if test -n "$BIGDROID_PROJECT"; then
+		_buildCacheRoot="$TMP_DIR/gearlock_out"
+	else
+		_buildCacheRoot="${_execDir}/out"
+	fi
+	_buildCache="${_buildCacheRoot}/gearlock"
+	_buildCacheInstallerDir="${_buildCacheRoot}/gri"
+	_buildInstallerOut="${_buildCacheRoot}/installer"
+	_installerSrc="${_execDir}/installer"
+	_gearlockVersionCode="$(< "${_execDir}"/core/version)"
+}
+
+
+function build.main() {
+		
+	# Define core vars
+# 	local _buildVariant="$1"
+	local _compressionLevel="$1"
+	
+    # Clean & remake _buildCacheRoot|_buildCache
+    test -e "${_buildCacheRoot}" && rm -r "${_buildCacheRoot}"
+    mkdir -p "${_buildCacheRoot}" "${_buildCache}" || handleError "Failed 'mkdir ${_buildCache}'"
+		
+	if test -z "$RUN_CHECK"; then
+		echo -e "Start of GearLock ${_gearlockVersionCode} build\n"
+			
+		# Copy raw files into _buildCache
+		echo -e "Copying raw files into ${_buildCache}"
+		cd "${_execDir}" && rsync -ah --info=progress2 bin core etc lib libexec share usr "${_buildCache}" || handleError "Failed to copy files into ${_buildCache}\'"
+			
+		# Change dir to _buildCache
+		cd "${_buildCache}" || exit
+		mkdir ${_extraPlaceHolderDirs=tmp gearroot} && chmod 755 ${_extraPlaceHolderDirs} || handleError "Failed \'mkdir/chmod ${_extraPlaceHolderDirs}\'"
+			
+		# Re-configure/fix shebangs in bin & remove `gearlock/bin`
+		echo -e "Removing ${cExternal:=core/_external_}"
+		! rm -r ${cExternal} && handleError "Failed to \'rm -r ${cExternal}\'" && exit 1
+		rm -rf "core/.vscode"
+		#rm -f "${_buildCache}/bin/bashbox" "${_buildCache}/bin/mkrecovery.multi"
+	fi
+	
+	# Syntax-check source code and shebangs
+	local source_files_gen_list="${_buildCacheRoot}/.source_files"
+	rm -f "$source_files_gen_list"
+	file_list=($(awk 'NF' "${_execDir}/source_files" | sed '/#.*/d')) || handleError "Failed to read source_files"
+	for f in "${file_list[@]}"; do
+		echo "\"${_execDir}/$f\"" >> "$source_files_gen_list"
+	done
+	
+	echo -e "Checking source_files shebangs"
+	# Look for `#/bin/bash`
+	for f in $(xargs < "$source_files_gen_list"); do
+		! echo "$(dirname "$f")" | grep -q -E 'gearlock/core|gearlock/bin' && continue
+		sed -i '1s|#!.*/.*bin/|#!/gearlock/bin/|' "$f" || handleError "Failed to replace shebangs with sed"
+	done
+	
+	echo -e "Checkig source code syntax of GearLock ${_gearlockVersionCode}"
+	chmod +x "${_execDir}/bin/bashbox" || exit
+	STRICT="true" NO_CREATE="true" bash "${_execDir}/bin/bashbox" $(xargs < "$source_files_gen_list") \
+		|| handleError "Syntax errors found, can not continue"
+# 	readarray -d '' optim_gen_list < <(find "${_buildCache}/bin" "${_buildCache}/core" -name '*.bb.sh' -print0)
+# 	for gen_list in "${optim_gen_list[@]}"; do
+# 		#mv "$gen_list" "${gen_list%.bb.sh}"
+# 		rm "$gen_list"
+# 	done
+	test -n "$RUN_CHECK" && exit 0
+	
+	# Recursive Chmod 755 _buildCache
+	echo -e "Setting permissions to 755 recursively for cpio image"
+	chmod -R 755 "${_buildCache}" || handleError "Failed to \'chmod -R 755 ${_buildCache}\'"
+		
+	# Make cpio archive of `gearlock` ~~ cd into _buildCacheRoot
+	echo -e "Making cpio archive of gearlock directory: \c"
+	cd "${_buildCacheRoot}" || handleError "Failed to cd ${_buildCacheRoot}"
+	mkdir -p "${_buildCacheInstallerDir}" || handleError "Failed to mkdir ${_buildCacheInstallerDir}"
+	find gearlock | cpio --owner=0:0 -o -H newc -O "${_buildCacheInstallerDir}/gearlock"
+		
+	if test -z "$AOSP_PROJECT"; then
+		# Merge files from _installerSrc into _buildCacheInstallerDir
+		echo -e "Merging files from ${_installerSrc} into ${_buildCacheInstallerDir}"
+		local installerSrcFiles=(
+			"${_installerSrc}/bin"
+			"${_installerSrc}/hook"
+			"${_installerSrc}/sp"
+			"${_installerSrc}/fx.apk"
+			"${_installerSrc}/install"
+			"${_execDir}/core/version"
+		)
+		
+		for files in "${installerSrcFiles[@]}"; do
+			rsync -a "${files}" "${_buildCacheInstallerDir}"
+		done
+
+			
+		# Make ghome empty dirs
+		for folders in ghome ghome/dependencies ghome/extensions ghome/status ghome/unins ghome/gearboot \
+		${gd:=ghome/gearboot}/boot-comp $gd/boot-post $gd/init $gd/post-fs $gd/post-fs-data; do mkdir -p "${_buildCacheInstallerDir}/$folders"; done
+		# Copy extra ghome subdirs
+	# 	rsync -a "${_installerSrc}/extensions" "${_installerSrc}/.config" "${_installerSrc}/.local" "${_buildCacheInstallerDir}/ghome"
+		chmod -R 755 "${_buildCacheInstallerDir}" 
+			
+		# Create self executable gearlock installer
+		echo -e "Making executable GearLock Installer: \c"
+		! build.mkInstaller "${_buildInstallerOut}"/gearlock gri "${_compressionLevel}" > /dev/null 2>&1 \
+			&& handleError "Making of gearlock installer failed"
+		ls -lh "${_buildInstallerOut}" | grep gearlock | awk '{print $5}'
+			
+		# Make bootinstall-initrd.img
+		echo -e "Making initrd.img-bootinstall image: \c"
+		bash "${_installerSrc}/boot-installer/makeme" "${_buildInstallerOut}/initrd.img"
+	fi
+};
+
+function patch.aosp_root() {
+	if test -n "$BIGDROID_PROJECT"; then
+		files_to_patch=(
+			"initial_ramdisk/init"
+			"install_ramdisk/scripts/1-install"
+			"install_ramdisk/grub2/efi/boot/android.cfg"
+			"install_ramdisk/grub2/efi/boot/grub.cfg"
+		)
+	else
+		files_to_patch=(
+			"device/generic/common/device.mk"
+			"bootable/newinstaller/Android.mk"
+			"bootable/newinstaller/initrd/init"
+			"bootable/newinstaller/install/scripts/1-install"
+			"bootable/newinstaller/install/grub2/efi/boot/android.cfg"
+		)
+	fi
+	
+# 	function get.patch_file() {
+# 		local patch_file="$1"
+# 		local line
+# 		for line in "${files_to_patch[@]}"; do
+# 			echo "$line" | grep -q ".*${patch_file}\$" && break
+# 		done
+# 		echo "$aosp_root/$line"
+# 	}
+	
+	function patch.apply() {
+		local FILE="${1##*/}"
+		local FILE_PATH="$1"
+		echo -e "==== Applying GearLock patches to $FILE"
+		
+		if [ "${FILE}" == "device.mk" ]; then
+			local _dir="$(echo "$0" | grep -q 'vendor' && echo 'vendor' || echo 'bootable')"
+			gslr "$FILE_PATH" \
+				'PRODUCT_COPY_FILES := \\' \
+				"PRODUCT_COPY_FILES := \\\\\n    $_dir\/gearlock\/out\/gri\/gearlock:gearlock \\\\" \
+			|| handleError "Failed to patch $FILE"
+			
+		elif [ "${FILE}" == "Android.mk" ]; then
+			line="$(grep -n 'BUILT_IMG.*:=.*$(.*)' "$FILE_PATH" | head -n1 \
+					| sed 's|/|\\/|g; s| gearlock||; s|initrd.img|initrd.img gearlock|')"
+					
+			sed -i "${line%%:*}s/.*/${line#*:}/" "$FILE_PATH" \
+			|| handleError "Failed to patch $FILE"
+			
+		elif [ "${FILE}" == "init" ]; then
+				gslr "$FILE_PATH" "mount_sdcard" "mount_sdcard; hook_gearinit" \
+				|| handleError "Failed to patch $FILE"
+				
+		elif [ "${FILE}" == "1-install" ]; then
+				line="$(grep -n 'files=.*".*initrd.img.*"' "$FILE_PATH" | head -n1 \
+						| sed 's| /mnt/$SRC/gearlock||; s|initrd.img|initrd.img /mnt/$SRC/gearlock|; s|/|\\/|g')"
+						
+				sed -i "${line%%:*}s/.*/${line#*:}/" "$FILE_PATH" \
+				|| handleError "Failed to patch $FILE"
+				
+		elif [ "${FILE}" == "android.cfg" ]; then
+				sed -i 's/add_entry.*$/& NORECOVERY=1/g' "$FILE_PATH"
+				sed -i 's|submenu "Advanced options -> ".*$|& \
+	add_entry "$live - Boot into GearLock recovery mode" ALWAYSRECOVERY=1\
+	add_entry "$live - Boot into GearLock recovery mode with NOGFX=1 flag" ALWAYSRECOVERY=1 NOGFX=1\
+	add_entry "$live - Boot with Auto-ExtFs-Repair flag" quiet FIXFS=1|' "$FILE_PATH"
+		fi
+		
+		if test -z "$BIGDROID_PROJECT"; then
+			local ORIG_PWD
+			ORIG_PWD="$(pwd)"
+			FILE="$FILE_PATH"
+			cd "${FILE%/*}" || handleError "Failed to change dir to ${FILE%/*}"
+			git commit -a -m "$_unique_commit_msg" --author="AXON <axonasif@gmail.com>" 1>/dev/null
+			cd "$ORIG_PWD"
+		fi
+	}
+	
+	# Start with updating/placing hook script
+	HOOK_PATH="$(
+		if test -n "$BIGDROID_PROJECT"; then
+			echo "$aosp_root/initial_ramdisk/scripts/0-hook"
+		else
+			echo "$aosp_root/bootable/newinstaller/initrd/scripts/0-hook"
+		fi
+	)" && {
+		rsync "$_execDir/installer/hook" "$HOOK_PATH" || handleError "Failed to copy hook into $HOOK_PATH"
+		(
+			test -z "$BIGDROID_PROJECT" && {
+				cd "${HOOK_PATH%/*}" || handleError "Failed to apply hook"
+				cd ../../ || handleError "Failed to apply hook"
+				git add initrd/scripts/0-hook || handleError "Failed to apply hook"
+				git commit -m "Apply GearLock ${_gearlockVersionCode} initrd hook" --author="AXON <axonasif@gmail.com>" >/dev/null 2>&1
+			}
+		)
+	}
+	
+	# Now let's find which files we need to patch
+	for _file in "${files_to_patch[@]}"; do
+		local patch_sum_file="$_execDir/.patch_sum"
+		local _sel_file="$aosp_root/$_file"
+		local _unique_commit_msg="Apply GearLock patches #1 for ${_sel_file/$aosp_root\//}"
+		test -e "$_sel_file" && {
+
+			if test -v "BIGDROID_PROJECT"; then {
+				patch.apply "$_sel_file";
+			} else {
+				# First checking method for ensuring that the patches are not being re-applied
+				local _git_patch_log
+				_git_patch_log="$(git -C "${_sel_file%/*}" log --no-merges --pretty=format:"%s" | grep -m1 -B9999 "^$_unique_commit_msg")"
+				echo "+++ ${_sel_file%/*}"
+				test -z "$_git_patch_log" || grep -q "^Revert \"$_unique_commit_msg\"" <<<"$_git_patch_log" && {
+
+					if test -z "$NO_PATCH_SUM" && test -e "$patch_sum_file"; then
+						test "$(sha256sum "$_sel_file" | awk '{print $1}')" != "$(echo "$(< "$patch_sum_file")" | grep "${_sel_file##*/}" | awk '{print $2}')" && {
+							patch.apply "$_sel_file" && \
+							sed -i "s|${_sel_file##*/}.*|${_sel_file##*/} $(sha256sum "$_sel_file" | awk '{print $1}')|" "$patch_sum_file"
+						}
+					else
+						export NO_PATCH_SUM=true
+						! grep -i -E -q 'gearlock|gearinit' "$_sel_file" \
+							&& patch.apply "$_sel_file" && \
+						echo "${_sel_file##*/} $(sha256sum "$_sel_file" | awk '{print $1}')" >> "$patch_sum_file"
+					fi
+
+				}
+			} fi
+
+		}
+	done
+}
+
+
+function gen.newVersion() {
+	function semver() {
+		# https://github.com/fsaintjacques/semver-tool
+		NAT='0|[1-9][0-9]*'
+		ALPHANUM='[0-9]*[A-Za-z-][0-9A-Za-z-]*'
+		IDENT="$NAT|$ALPHANUM"
+		FIELD='[0-9A-Za-z-]+'
+
+SEMVER_REGEX="\
+^[vV]?\
+($NAT)\\.($NAT)\\.($NAT)\
+(\\-(${IDENT})(\\.(${IDENT}))*)?\
+(\\+${FIELD}(\\.${FIELD})*)?$"
+
+		function error {
+			echo -e "$1" >&2
+			exit 1
+		}
+
+
+		function usage_help() {
+			exit 1
+		}
+
+		function validate_version {
+			local version=$1
+			if [[ "$version" =~ $SEMVER_REGEX ]]; then
+				# if a second argument is passed, store the result in var named by $2
+				if [ "$#" -eq "2" ]; then
+				local major=${BASH_REMATCH[1]}
+				local minor=${BASH_REMATCH[2]}
+				local patch=${BASH_REMATCH[3]}
+				local prere=${BASH_REMATCH[4]}
+				local build=${BASH_REMATCH[8]}
+				eval "$2=(\"$major\" \"$minor\" \"$patch\" \"$prere\" \"$build\")"
+				else
+				echo "$version"
+				fi
+			else
+				error "version $version does not match the semver scheme 'X.Y.Z(-PRERELEASE)(+BUILD)'. See help for more information."
+			fi
+		}
+
+		# render_prerel -- return a prerel field with a trailing numeric string
+		#                  usage: render_prerel numeric [prefix-string]
+		#
+		function render_prerel {
+			if [ -z "$2" ]
+			then
+				echo "${1}"
+			else
+				echo "${2}${1}"
+			fi
+		}
+
+		# extract_prerel -- extract prefix and trailing numeric portions of a pre-release part
+		#                   usage: extract_prerel prerel prerel_parts
+		#                   The prefix and trailing numeric parts are returned in "prerel_parts".
+		#
+		PREFIX_ALPHANUM='[.0-9A-Za-z-]*[.A-Za-z-]'
+		DIGITS='[0-9][0-9]*'
+		EXTRACT_REGEX="^(${PREFIX_ALPHANUM})*(${DIGITS})$"
+
+		function extract_prerel {
+			local prefix; local numeric;
+
+			if [[ "$1" =~ $EXTRACT_REGEX ]]
+			then                                        # found prefix and trailing numeric parts
+				prefix="${BASH_REMATCH[1]}"
+				numeric="${BASH_REMATCH[2]}"
+			else                                        # no numeric part
+				prefix="${1}"
+				numeric=
+			fi
+
+			eval "$2=(\"$prefix\" \"$numeric\")"
+		}
+
+		# bump_prerel -- return the new pre-release part based on previous pre-release part
+		#                and prototype for bump
+		#                usage: bump_prerel proto previous
+		#
+		function bump_prerel {
+			local proto; local prev_prefix; local prev_numeric;
+
+			# case one: no trailing dot in prototype => simply replace previous with proto
+			if [[ ! ( "$1" =~ \.$ ) ]]
+			then
+				echo "$1"
+				return
+			fi
+
+			proto="${1%.}"                              # discard trailing dot marker from prototype
+
+			extract_prerel "${2#-}" prerel_parts        # extract parts of previous pre-release
+		#   shellcheck disable=SC2154
+			prev_prefix="${prerel_parts[0]}"
+			prev_numeric="${prerel_parts[1]}"
+
+			# case two: bump or append numeric to previous pre-release part
+			if [ "$proto" == "+" ]                      # dummy "+" indicates no prototype argument provided
+			then
+				if [ -n "$prev_numeric" ]
+				then
+					: $(( ++prev_numeric ))             # previous pre-release is already numbered, bump it
+					render_prerel "$prev_numeric" "$prev_prefix"
+				else
+					render_prerel 1 "$prev_prefix"      # append starting number
+				fi
+				return
+			fi
+
+			# case three: set, bump, or append using prototype prefix
+			if [  "$prev_prefix" != "$proto" ]
+			then
+				render_prerel 1 "$proto"                # proto not same pre-release; set and start at '1'
+			elif [ -n "$prev_numeric" ]
+			then
+				: $(( ++prev_numeric ))                 # pre-release is numbered; bump it
+				render_prerel "$prev_numeric" "$prev_prefix"
+			else
+				render_prerel 1 "$prev_prefix"          # start pre-release at number '1'
+			fi
+		}
+
+		function command_bump {
+			local new; local version; local sub_version; local command;
+
+			case $# in
+				2) case $1 in
+					major|minor|patch|prerel|release) command=$1; sub_version="+."; version=$2;;
+					*) usage_help;;
+				esac ;;
+				3) case $1 in
+					prerel|build) command=$1; sub_version=$2 version=$3 ;;
+					*) usage_help;;
+				esac ;;
+				*) usage_help;;
+			esac
+
+			validate_version "$version" parts
+			# shellcheck disable=SC2154
+			local major="${parts[0]}"
+			local minor="${parts[1]}"
+			local patch="${parts[2]}"
+			local prere="${parts[3]}"
+			local build="${parts[4]}"
+
+			case "$command" in
+				major) new="$((major + 1)).0.0";;
+				minor) new="${major}.$((minor + 1)).0";;
+				patch) new="${major}.${minor}.$((patch + 1))";;
+				release) new="${major}.${minor}.${patch}";;
+				prerel) new=$(validate_version "${major}.${minor}.${patch}-$(bump_prerel "$sub_version" "$prere")");;
+				build) new=$(validate_version "${major}.${minor}.${patch}${prere}+${sub_version}");;
+				*) usage_help ;;
+			esac
+
+			echo "$new"
+			exit 0
+		}
+
+		function command_get {
+			local part version
+
+			if [[ "$#" -ne "2" ]] || [[ -z "$1" ]] || [[ -z "$2" ]]; then
+				usage_help
+				exit 0
+			fi
+
+			part="$1"
+			version="$2"
+
+			validate_version "$version" parts
+			local major="${parts[0]}"
+			local minor="${parts[1]}"
+			local patch="${parts[2]}"
+			local prerel="${parts[3]:1}"
+			local build="${parts[4]:1}"
+			local release="${major}.${minor}.${patch}"
+
+			case "$part" in
+				major|minor|patch|release|prerel|build) echo "${!part}" ;;
+				*) usage_help ;;
+			esac
+
+			exit 0
+		}
+
+		case $# in
+		0) echo "Unknown command: $*";;
+		esac
+
+		case $1 in
+			bump) shift; command_bump "$@";;
+			get) shift; command_get "$@";;
+			*) echo "Unknown arguments: $*";;
+		esac
+
+	}
+
+		# Gather the data we need
+		local CURRENT_VERSION PATCH_VERSION MINOR_VERSION VERSION_FILE 
+
+		NEW_COMMITS="$(git log --no-merges --pretty=format:"%s" | sed '/Update version code/Q' | grep -v -i '^Update.*' | wc -l)"
+		VERSION_FILE="${_execDir}/core/version"
+
+		# Handling what we need to do
+		for times in $(seq $NEW_COMMITS); do
+			CURRENT_VERSION="$(< "$VERSION_FILE")" || return
+			PATCH_VERSION="$(semver get patch "$CURRENT_VERSION")" || return
+			MINOR_VERSION="$(semver get minor "$CURRENT_VERSION")" || return
+
+			# Version updating logic
+			local bumpPoint="40"
+			local bumpPointMajor="10"
+			if [ "$PATCH_VERSION" != "$bumpPoint" ] && [ "$PATCH_VERSION" -lt "$bumpPoint" ]; then
+				echo "$(semver bump patch "$CURRENT_VERSION")" > "$VERSION_FILE"
+			elif [ "$MINOR_VERSION" == "$bumpPointMajor" ]; then
+				echo "$(semver bump major "$CURRENT_VERSION")" > "$VERSION_FILE"
+			elif [ "$PATCH_VERSION" == "$bumpPoint" ]; then
+				echo "$(semver bump minor "$CURRENT_VERSION")" > "$VERSION_FILE"
+			fi
+		done
+		
+		# Update version badge on README.md
+		sed -i "s|https://img.shields.io/badge/GearLock-.*-blue.svg|https://img.shields.io/badge/GearLock-$(< "$VERSION_FILE")-blue.svg|g" "$_execDir/README.md"
+}
+
+function gen.conventionalChangelog() {
+	# Gather logs
+	output="${_execDir}/CHANGELOG.md" && rm -f "$output" || exit
+	fullGitlog="$(git log --no-merges --pretty=format:"%s [[%an](https://github.com/axonasif/gearlock/commit/%H)]" "$@" \
+				| grep -E '^feat|^fix|^perf|^refactor|^chore|^build|^ci')"
+	fixLog="$(echo "$fullGitlog" | grep '^fix.*:')"
+	featLog="$(echo "$fullGitlog" | grep '^feat.*:')"
+	choreLog="$(echo "$fullGitlog" | grep '^chore.*:')"
+	refactorLog="$(echo "$fullGitlog" | grep '^refactor.*:')"
+	perfLog="$(echo "$fullGitlog" | grep '^perf.*:')"
+	buildLog="$(echo "$fullGitlog" | grep '^build.*:')"
+	ciLog="$(echo "$fullGitlog" | grep '^ci.*:')"
+
+	# Now lets phrase them
+	for log in "$featLog" "$fixLog" "$perfLog" "$refactorLog" "$choreLog" "$buildLog" "$ciLog"; do
+		if test -n "$log"; then
+			logName="$(echo "$log" | head -n1 | cut -d ':' -f1 | sed 's|(.*)||g')"
+			# Create H1
+			case "$logName" in
+				"feat")
+					echo "### New Features" >> "$output"
+					;;
+				"fix")
+					echo -e "\n\n### Bug Fixes" >> "$output"
+					;;
+				"perf")
+					echo -e "\n\n### Performance Improvements" >> "$output"
+					;;
+				"refactor")
+					echo -e "\n\n### Refactors" >> "$output"
+					;;
+				"chore")
+					echo -e "\n\n### Chores" >> "$output"
+					;;
+				"build")
+					echo -e "\n\n### Build System" >> "$output"
+					;;
+				"ci")
+					echo -e "\n\n### Continuous Integration" >> "$output"
+					;;
+			esac
+
+			# Merge logs
+			echo >> "$output"
+			while read -r line; do
+				if echo "$line" | grep -q "^.*(.*): "; then
+					raw="$(echo "$line" | sed 's|^feat||; s|^fix||; s|^perf||; s|^refactor||; s|^chore||; s|^build||; s|^ci||')"
+					tag="**$(echo "$raw" | sed 's|:.*||; s|(||; s|)||')**"
+					content="$(echo "$raw" | sed 's|.*(.*): ||')"
+					echo "* ${tag}: ${content}" >> "$output"
+				else
+					echo -e "* $(echo "$line" | sed 's|^.*: ||')" >> "$output"
+				fi
+			done < <(echo "$log")
+		fi
+	done
+}
+
+
+function setup.gitHooks() {
+	test ! -e "$_execDir/.git/hooks" && return 1
+	cat > "${_execDir}/.git/hooks/commit-msg" <<"EOF"
+#!/usr/bin/env bash
+# Adapted to be bash friendly from https://github.com/craicoverflow/sailr
+# For the gearlock repository
+
+# Print out a standard error message which explains
+# how the commit message should be structured
+function print_error() {
+	commit_message="$1"
+# 	regular_expression=$2
+	echo -e "\n\e[31m[Invalid Commit Message]"
+	echo -e "------------------------\033[0m\e[0m"
+	echo -e "Valid types: \e[36m${types[@]}\033[0m"
+	echo -e "Max length (first line): \e[36m$max_length\033[0m"
+	echo -e "Min length (first line): \e[36m$min_length\033[0m\n"
+# 	echo -e "\e[37mRegex: \e[33m$regular_expression\033[0m"
+	echo -e "\e[37mActual commit message: \e[33m\"$commit_message\"\033[0m"
+	echo -e "\e[37mActual length: \e[33m$(echo $commit_message | wc -c)\033[0m\n"
+	echo -e 'Examples:\n
+feat: Auto updating support for gxp installer
+
+fix: Syntax error on core/settings
+
+perf: Optimize booting sequence code in bin/gearboot
+
+refactor: Change how bin/gxpm handle arguments
+
+For detailed info, please check https://www.conventionalcommits.org
+	'
+	exit 1
+}
+
+function main() {
+	types=(
+			"feat"
+			"fix"
+			"perf"
+			"refactor"
+			"chore"
+			"build"
+			"ci"
+	)
+	min_length=5
+	max_length=52
+
+	regexp="^[.0-9]+$|"
+
+	for type in "${types[@]}"; do
+		regexp="${regexp}$type|"
+	done
+
+	regexp="${regexp%|})(\(.+\))?: "
+	regexp="${regexp}.{$min_length,$max_length}$"
+
+	# get the first line of the commit message
+	START_LINE="$(head -n1 "${INPUT_FILE:="$1"}")"
+	
+	echo "$START_LINE" | grep -q -E '^Update|^Merge' && return 0
+	
+	if ! echo "$START_LINE" | grep -q ':' || [[ ! "$START_LINE" =~ $regexp ]]; then
+		# commit message is invalid according to config - block commit
+		print_error "$START_LINE"
+	fi
+}
+
+main "$@"
+
+EOF
+
+# 	cat > "${_execDir}/.git/hooks/pre-commit" <<"EOF"
+# #!/usr/bin/env bash
+# git pull
+# EOF
+	test $? != 0 && exit 1
+
+	chmod 777 "${_execDir}/.git/hooks/commit-msg" || exit 1
+
+}
+
+
+function setup.devEnv() {
+	test "$(whoami)" != 'root' && handleError 'Run as root' 1
+
+	NEW_ROOT="${1:-"$HOME/gdev_root"}"
+	mkdir -p "$NEW_ROOT" && chmod 777 "$NEW_ROOT" || exit
+
+	for _dir in proc dev sys; do
+		mkdir -p "$NEW_ROOT/$_dir" || exit
+		mountpoint -q "$NEW_ROOT/_$dir" && {
+			echo "$NEW_ROOT/$_dir is already mounted"
+			continue
+		}
+		mount --bind "/$_dir" "$NEW_ROOT/$_dir" || exit
+	done
+
+	mkdir -p "$NEW_ROOT/gearlock" && chmod 755 "$NEW_ROOT/gearlock" || exit
+	! mountpoint -q "$NEW_ROOT/gearlock" && {
+		mount --bind "${_execDir}" "$NEW_ROOT/gearlock" || exit
+	}
+
+	test ! -e "$NEW_ROOT/data/ghome" && {
+		mkdir -p "$NEW_ROOT/data/ghome"
+		chmod -R 755 "$NEW_ROOT/data"
+	}
+	echo -e "+++ Now run the following command to enter gearlock development root: \
+	\033[0;31msudo chroot \"$NEW_ROOT\" /gearlock/bin/env GDEBUG=true /gearlock/bin/bash\033[0m"
+}
+
+# CLAP
+case "$1" in
+	--aosp-project-makefile)
+		aosp_root="$(pwd)" || handleError "Failed to locate \$aosp_root"
+		AOSP_PROJECT=true
+		build.setVars
+		setup.gitHooks
+		patch.aosp_root
+		build.main "-mx23"
+		;;
+	--aosp-project-vendorsetup)
+		shift
+		test -z "$1" && handleError "Failed to locate \$aosp_root"
+		aosp_root="$1"
+		AOSP_PROJECT=true
+		build.setVars
+		setup.gitHooks
+		patch.aosp_root
+		build.main "-mx23"
+		;;
+	--bigdroid-project-hook)
+		export BIGDROID_PROJECT=true
+		test -z "$SYSTEM_DIR" && exit 1
+		exec "$0" --aosp-project-vendorsetup "$MOUNT_DIR"
+		;;
+	--run-check)
+		RUN_CHECK=true
+		build.setVars
+		build.main ${1:-"-mx23"}
+		;;
+	--update-version)
+		build.setVars
+		gen.newVersion
+		;;
+	--create-changelog)
+		shift
+		build.setVars
+		gen.conventionalChangelog "$@"
+		;;
+	--setup-devenv)
+		shift
+		build.setVars
+		setup.gitHooks
+		setup.devEnv "$1"
+		;;
+	*)
+		build.setVars
+		setup.gitHooks
+		build.main ${1:-"-mx23"}
+		;;
+esac

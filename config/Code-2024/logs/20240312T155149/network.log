@@ -1,0 +1,2 @@
+2024-03-12 15:51:50.309 [error] electron #1: https://az764295.vo.msecnd.net/extensions/marketplace.json - error GET net::ERR_NAME_NOT_RESOLVED
+2024-03-12 15:51:50.923 [error] electron #3: https://vscode-sync.trafficmanager.net/v1/manifest - error GET net::ERR_NAME_NOT_RESOLVED

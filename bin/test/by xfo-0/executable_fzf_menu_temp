@@ -1,0 +1,50 @@
+#!/usr/bin/env zsh
+
+# Define the menu items
+menu_items=(
+    "Option 1"
+    "Option 2"
+    "Option 3"
+)
+
+# Define the menu prompts
+prompts=(
+    "Select an option:"
+    "Select a sub-option for "
+)
+
+# Define the function that generates the sub-menu options
+function sub_options() {
+    case $1 in
+        "Option 1")
+            echo "Option 1-1"
+            echo "Option 1-2"
+            echo "Option 1-3"
+            ;;
+        "Option 2")
+            echo "Option 2-1"
+            echo "Option 2-2"
+            echo "Option 2-3"
+            ;;
+        "Option 3")
+            echo "Option 3-1"
+            echo "Option 3-2"
+            echo "Option 3-3"
+            ;;
+    esac
+}
+
+# Define the fzf command
+cmd="printf '%s\n' '${(j: :)menu_items}' | fzf --prompt='${prompts[1]}' --preview='printf \"%s\n\" \"${(q)${prompts[2]}$it}\" | fzf' --preview-window=down:3:wrap"
+
+# Run the fzf command
+selection=$(eval $cmd)
+
+# Check if a selection was made
+if [[ -n $selection ]]; then
+    # If a selection was made, generate the sub-menu options and run the fzf command again
+    sub_selection=$(printf '%s\n' "$(sub_options "$selection")" | fzf --prompt="${prompts[2]}$selection ")
+    echo "Selected: $selection, $sub_selection"
+else
+    echo "No selection made"
+fi

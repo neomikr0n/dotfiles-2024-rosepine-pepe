@@ -1,0 +1,5 @@
+2024-03-19 16:15:07.709 [info] Started local extension host with pid 2389.
+2024-03-19 16:15:07.799 [error] Extension 'ms-python.python' wants API proposal 'saveEditor' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+2024-03-19 16:15:07.804 [warning] [twxs.cmake]: Cannot register 'cmake.cmakePath'. This property is already registered.
+2024-03-19 16:15:10.351 [info] [perf] Render performance baseline is 12ms
+2024-03-19 16:15:10.828 [warning] [cmake-tools]: Couldn't find message for key cmake-tools.configuration.cmake.options.advanced.statusBarVisibility.variant.description.

@@ -1,0 +1,3 @@
+audio.play_bitrate_non_metered_migrated=true
+audio.crossfade_v2=true
+video.subtitles="en-US"

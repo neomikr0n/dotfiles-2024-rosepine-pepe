@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# NOTIFICATIONS (swaync)
+CONFIG="$HOME/.config/swaync/config.json"
+STYLE="$HOME/.config/swaync/style.css"
+
+# killall -9 mako dunst swaync && sleep 0.5 &&
+if [[ ! $(pidof swaync mpvpaper) ]]; then
+  swaync -c ${CONFIG} -s ${STYLE}
+fi
+
+
+# -----------------------------------------------------
+# NOTIFICATIONS (mako)
+# CONFIG="$HOME/.config/mako/config"
+
+# if [[ ! $(pidof mako) ]]; then
+#   mako -c ${CONFIG}
+# fi

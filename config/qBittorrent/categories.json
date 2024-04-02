@@ -1,0 +1,14 @@
+{
+    "Audio": {
+        "save_path": "/run/media/n30/chivos_4t/Music"
+    },
+    "Books": {
+        "save_path": ""
+    },
+    "Game": {
+        "save_path": "/run/media/n30/nvme_chivos/linuxsaurio"
+    },
+    "Movie": {
+        "save_path": ""
+    }
+}

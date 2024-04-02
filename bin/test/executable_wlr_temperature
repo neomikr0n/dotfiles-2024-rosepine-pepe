@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Check the first positional argument
+if [ "$1" == "up" ]; then
+    increment=1000
+elif [ "$1" == "down" ]; then
+    increment=-1000
+else
+    echo "Invalid argument. Must be 'up' or 'down'."
+    exit 1
+fi
+
+direction=$1
+
+shift
+
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+# Parse options to the `my_script` command
+while getopts "v:" opt; do
+    case "$opt" in
+    v)  value=$OPTARG
+        # Check if the value is an integer between 1 and 10000
+        if ! [[ "$value" =~ ^[1-9][0-9]{0,3}$ ]] || ((value > 10000)); then
+            echo "must be an integer where 1<=x<=10000"
+            exit 1
+        else
+            if [ "$direction" == "up" ]; then
+                increment=$value
+            fi
+            if [ "$direction" == "down" ]; then
+                increment=-$value
+            fi
+        fi
+        ;;
+      *) echo "Invalid option: -$OPTARG" >&2
+         exit 1
+         ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+# Get the current brightness value
+current_temperature=$(busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature | awk '{print $2}')
+
+# Calculate the new brightness value
+new_temperature=$(echo "$current_temperature + $increment" | bc)
+
+# Make sure the new brightness value is within the valid range [0, 1]
+new_temperature=$(echo "if ($new_temperature < 1000) 1000 else if ($new_temperature > 10000) 10000 else $new_temperature" | bc)
+
+# Set the new brightness value
+busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q "$new_temperature"
+
+# notify:
+notify-send "wlr_temperature:" "$new_temperature"

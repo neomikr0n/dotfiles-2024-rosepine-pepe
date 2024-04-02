@@ -1,0 +1,12 @@
+#!/bin/bash
+# STATUSBAR (waybar)
+CONFIG="$HOME/.config/hypr/component/waybar/config"
+STYLE="$HOME/.config/hypr/component/waybar/style.css"
+
+killall -q waybar & sleep 0.5 
+if [[ ! $(pidof waybar) ]]; then
+  waybar -c ${CONFIG} -s ${STYLE}
+fi
+
+
+  # waybar --log-level error -c ${CONFIG} -s ${STYLE}

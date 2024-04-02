@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# by neomikr0n
+
+count() {
+  timer -l "$1" | lolcat -a -d 1 -s 999 -t
+}
+
+glava() {
+  glava & disown 
+}
+
+openbrowser() {
+  # continuously check if the internet is available and open browser once it is
+  while ! ping -c 1 google.com &> /dev/null
+  do
+      notify-send -e "Internet not available yet. Trying again in 3 seconds..."
+      sleep 3
+  done
+  notify-send -e "Internet is available!! Opening Browser :)"
+  hyprctl dispatch workspace 2
+  # hyprctl dispatch exec [workspace 1 silent] whatsie
+  hyprctl dispatch exec [workspace 1 silent] whatsapp-for-linux
+  hyprctl dispatch exec [workspace 1 silent] easyeffects
+  sleep 3
+  #hyprctl dispatch exec [workspace special silent] google-calendar-nativefier
+  #hyprctl dispatch exec [workspace special silent] todoist-nativefier
+  hyprctl dispatch exec [workspace 2] brave
+  
+  sleep 25
+  # killall mpvpaper
+  pkill mpvpaper
+  mpvpaper -o "--loop --mute=yes --video-unscaled=yes" DP-1 /home/n30/Videos/pepe.mp4; disown
+
+  sleep .5
+  # bash ~/.dotfiles/bin/videowallpaper-change dinos
+  hyprctl dispatch exec [workspace 6 silent] qbittorrent
+  hyprctl dispatch exec [workspace special silent] tidal-hifi
+
+}
+
+heroiclauncher() {
+  # pkill heroic &
+  # heroic &
+  pkill heroic
+  sleep .5
+  hyprctl dispatch exec [workspace 5 silent] heroic
+}
+
+gamescope3440() {
+  pkill heroic
+  gamescope -w 3440 -h 1440 -f -- heroic
+}
+
+gamescope2560() {
+  pkill heroic
+  gamescope -W 2560 -h 1080 -w 3440 -h 1440 -f -- heroic
+}
+
+# main
+if [[ "$1" == "--count" ]]; then
+  count "$2"
+elif [[ "$1" == "--glava" ]]; then
+  glava
+elif [[ "$1" == "--openbrowser" ]]; then
+  openbrowser
+elif [[ "$1" == "--heroic" ]]; then
+  heroiclauncher
+elif [[ "$1" == "--gamescope3440" ]]; then
+  gamescope3440
+elif [[ "$1" == "--gamescope2560" ]]; then
+  gamescope3440
+else
+  notify_user
+fi

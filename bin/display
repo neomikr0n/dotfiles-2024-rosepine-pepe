@@ -1,0 +1,197 @@
+#!/bin/bash
+# ░█▀▀▄░█▀▀░▄▀▀▄░█▀▄▀█░░▀░░█░▄░█▀▀▄░█▀▀█░█▀▀▄░░     # BETA
+# ░█░▒█░█▀▀░█░░█░█░▀░█░░█▀░█▀▄░█▄▄▀░█▄▀█░█░▒█░░     changing gamma, temperature, brightness 
+# ░▀░░▀░▀▀▀░░▀▀░░▀░░▒▀░▀▀▀░▀░▀░▀░▀▀░█▄▄█░▀░░▀░░     on wayland linux (Hyprland)
+
+# original scripts for gamma and brightnes functions by xfo-0 founded on:
+# https://github.com/xfo-0/dot_confs/blob/f0eeb31179b120d486f4efe4e48eee86ad19fa95/bin/executable_wlr_temperature#L45
+# https://github.com/xfo-0/dot_confs/blob/f0eeb31179b120d486f4efe4e48eee86ad19fa95/bin/executable_wlr_brightness
+
+# GLOBAL FUNCTIONS:
+play="canberra-gtk-play -i audio-volume-change"    
+notification() { # Displays a message
+device="i2c-10"
+#TODO: unification between the functions notifications eventually
+}
+
+# LOCAL FUNCTIONS:
+gamma() {
+    # Check the first positional argument
+    if [ "$1" == "gamma_up" ]; then
+        increment=1000
+    elif [ "$1" == "gamma_down" ]; then
+        increment=-1000
+    else
+        echo "Invalid argument. Must be 'up' or 'down'."
+        exit 1
+    fi
+
+    direction=$1
+
+    shift
+
+    OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+    # Parse options to the `my_script` command
+    while getopts "v:" opt; do
+        case "$opt" in
+        v)  value=$OPTARG
+            # Check if the value is an integer between 1 and 10000
+            if ! [[ "$value" =~ ^[1-9][0-9]{0,3}$ ]] || ((value > 10000)); then
+                echo "must be an integer where 1<=x<=10000"
+                exit 1
+            else
+                if [ "$direction" == "up" ]; then
+                    increment=$value
+                fi
+                if [ "$direction" == "down" ]; then
+                    increment=-$value
+                fi
+            fi
+            ;;
+        *) echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        esac
+    done
+
+    shift $((OPTIND-1))
+
+    # Get the current brightness value
+    current_temperature=$(busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Temperature | awk '{print $2}')
+
+    # Calculate the new temperature value
+    new_temperature=$(echo "$current_temperature + $increment" | bc)
+
+    # Make sure the new brightness value is within the valid range [0, 1]
+    new_temperature=$(echo "if ($new_temperature < 1000) 1000 else if ($new_temperature > 10000) 10000 else $new_temperature" | bc)
+
+    # Set the new brightness value
+    busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q "$new_temperature"
+
+    # https://github.com/phuhl/linux_notification_center#example-brightness-indicator
+    progress_bar=$(echo "$new_temperature" | bc -l)
+    progress_bar="$(($progress_bar / 100))"
+
+    # notify:
+    # icon="/usr/share/icons/BeautyLine/actions/scalable/contrast.svg"
+    icon="/usr/share/icons/BeautyLine/preferences/scalable/preferences-desktop-color.svg"
+    notify-send.py    --hint        string:x-canonical-private-synchronous:sys-notify \
+                                    string:image-path:file://$icon \
+                                    int:has-percentage:$progress_bar \
+                                    boolean:transient:true \
+                                -i $icon -t 999 -u low -a gammarelay -c gammarelay \
+                                "wlr_temperature:" "$new_temperature°K         test=$noti_id"
+    $play
+    # string:x-canonical-private-synchronous:sys-notify
+}
+brightness() { #TODO: don't use it yet, incomplete...
+    # WARNING!!!!!! ddccontrol sends data over the i2c bus, which is inherently a dangerous thing to do. Most i2c devices are very low-level and very dumb, one misplaced command can be enough to brick them or at least freeze the computer. That said, DDC/CI is a somewhat standardized, quite established and quite old technology, so the risks is not too high.
+
+    # Check if the user wants to increase or decrease the brightness
+    if [ "$1" == "brightness_up" ]; then
+        increment=10
+    elif [ "$1" == "brightness_down" ]; then
+        increment=-10
+    else
+        echo "Invalid argument. Must be 'up' or 'down'."
+        exit 1
+    fi
+
+    direction=$1
+
+    shift
+
+    OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+    # Parse options to the `my_script` command
+    while getopts "v:" opt; do
+        case "$opt" in
+        v)  value=$OPTARG
+            # Check if the value is an integer or a float between 0 and 1
+            if ! [[ "$value" =~ ^[0-1]+(\.[0-9]{0,3}[0-9])?$ ]]; then
+                echo "must be an integer or a float where 0.001<=x<=1"
+                exit 1
+            else
+                if [ "$direction" == "brightness_up" ]; then
+                    increment=$value
+                fi
+                if [ "$direction" == "brightness_down" ]; then
+                    increment=-$value
+                fi
+            fi
+            ;;
+        *) echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+        esac
+    done
+
+    shift $((OPTIND-1))
+
+    # Get the current brightness value
+    # current_brightness=$(busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Brightness | awk '{print $2}')
+    current_brightness=$(ddccontrol -r 0x10 dev:/dev/i2c-10 | awk 'NR==FNR {total=NR;next} NR==total {print}')
+    # Calculate the new brightness value
+    new_brightness=$(echo "scale=2; $current_brightness + $increment" | bc)
+
+    # Make sure the new brightness value is within the valid range [0, 1]
+    new_brightness=$(echo "scale=2; if ($new_brightness < 0) 0 else if ($new_brightness > 1) 1 else $new_brightness" | bc)
+
+    # Set the new brightness value
+    busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Brightness d "$new_brightness"
+
+    # https://github.com/phuhl/linux_notification_center#example-brightness-indicator
+    progress_bar=$(echo "$new_temperature" | bc -l)
+    progress_bar="$(($progress_bar / 100))"
+
+    # notify:
+    icon="/usr/share/icons/BeautyLine/actions/scalable/contrast.svg"
+    notify-send.py    --hint string:image-path:file://$icon \
+                                    int:has-percentage:$progress_bar \
+                                    boolean:transient:true \
+                                -i easyeffects -t 999 -u low -a gammarelay -c gammarelay \
+                                "wlr_temperature:" "$new_temperature°K         test=$noti_id"
+}
+brightnessFIXED() {    # WARNING!!!!!! ddccontrol sends data over the i2c bus, which is inherently a dangerous thing to do. Most i2c devices are very low-level and very dumb, one misplaced command can be enough to brick them or at least freeze the computer. That said, DDC/CI is a somewhat standardized, quite established and quite old technology, so the risks is not too high.
+    if [ "$1" == "brightnessFIXED_100" ]; then
+        ddccontrol -r 0x10 -w 100 dev:/dev/i2c-10
+    elif [ "$1" == "brightnessFIXED_75" ]; then
+        ddccontrol -r 0x10 -w 85 dev:/dev/i2c-10
+    elif [ "$1" == "brightnessFIXED_50" ]; then
+        ddccontrol -r 0x10 -w 50 dev:/dev/i2c-10
+    else
+        notify-send --urgency=normal --icon=firedragon -t 6666 "test..." "           ⌛0% [ █ █ █ █ █ █ █ █ █ █ █ ] 100%"
+        echo "Invalid argument."
+        exit 1
+    fi
+}
+profile() {    # WARNING!!!!!! ddccontrol sends data over the i2c bus, which is inherently a dangerous thing to do. Most i2c devices are very low-level and very dumb, one misplaced command can be enough to brick them or at least freeze the computer. That said, DDC/CI is a somewhat standardized, quite established and quite old technology, so the risks is not too high.
+    if [ "$1" == "profile_top" ]; then
+        ddccontrol -r 0x10 -w 100 dev:/dev/i2c-10
+        busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 10000
+        sleep 0.5
+        wlr-randr --output DP-1 --mode 3440x1440@143.975006Hz
+    elif [ "$1" == "profile_efficient" ]; then
+        ddccontrol -r 0x10 -w 85 dev:/dev/i2c-10
+        busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 4000
+        sleep 0.5
+        wlr-randr --output DP-1 --mode 3440x1440@59.973000Hz
+    else
+        notify-send --urgency=normal --icon=firedragon -t 6666 "test..." "           ⌛0% [ █ █ █ █ █ █ █ █ █ █ █ ] 100%"
+        echo "Invalid argument."
+        exit 1
+    fi
+}
+# MAIN:
+    if [[ "$1" == "gamma_"* ]]; then
+    gamma "$@"
+    elif [[ "$1" == "brightness_"* ]]; then
+    brightness "$@"
+    elif [[ "$1" == "brightnessFIXED_"* ]]; then
+    brightnessFIXED "$@"
+    elif [[ "$1" == "profile_"* ]]; then
+    profile "$@"
+    else
+    notification
+    fi

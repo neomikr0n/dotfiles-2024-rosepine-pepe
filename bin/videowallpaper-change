@@ -1,0 +1,142 @@
+#!/usr/bin/env bash
+
+# by neomikr0n
+# based on... nosvagor's:
+# https://raw.githubusercontent.com/nosvagor/dotfiles/main/bin/change-bg
+
+# DISPLAY="HDMI-A-1"
+DISPLAY="DP-1"
+VID_PATH="$HOME/Videos"
+
+background_choice=""
+if [[ $# -eq 0 ]]; then
+    background_choice="default"
+else
+    background_choice="$1"
+fi
+
+gravity () {
+    mpvpaper -o "--loop --mute=yes --video-unscaled=yes" $DISPLAY "$VID_PATH/gravity.mp4" & disown
+    # --brightness=6 --contrast=9 --saturation=-16 --hue=-24 
+}
+AlternateRealities () {
+    mpvpaper -o "--loop --mute=yes --video-unscaled=yes" $DISPLAY "$VID_PATH/AlternateRealities.mp4" & disown
+    # --brightness=-3 --contrast=10 --saturation=-42 --hue=69 
+}
+floatinginspace () {
+    mpvpaper -o "--loop --mute=yes --video-unscaled=yes" $DISPLAY "$VID_PATH/floatinginspace.mp4" & disown
+}
+blackhole () {
+    mpvpaper -o "--loop --brightness=3  --contrast=6  --saturation=-50  --hue=-8 --gamma=-20" $DISPLAY "$VID_PATH/blackhole.webm" & disown
+}
+fifi () {
+    mpvpaper -o "--loop --mute=yes --video-unscaled=yes --brightness=3  --contrast=10  --saturation=0  --hue=-8 --gamma=-20" $DISPLAY "$VID_PATH/fifi.mp4" & disown
+}
+doggo () {
+    mpvpaper -o "--loop --mute=yes --video-unscaled=yes --brightness=3  --contrast=10  --saturation=0  --hue=-8 --gamma=-20" $DISPLAY "$VID_PATH/1080/EP05_01m.mp4" & disown
+}
+galaxy () {
+    mpvpaper -o "--loop --brightness=3  --contrast=6  --saturation=0  --hue=-8 --gamma=-20 --video-unscaled=yes --mute=yes" DP-1 /home/n30/Videos/Hidamari/galaxy.mp4 & disown
+}
+delorean () {
+    mpvpaper -o "--loop --brightness=3  --contrast=6  --saturation=0  --hue=-8 --gamma=-20 --video-unscaled=yes --mute=yes" DP-1 /home/n30/Videos/Hidamari/delorean.mp4 & disown
+}
+collapse_academy () {
+    mpvpaper -o "--loop --brightness=3  --contrast=6  --saturation=0  --hue=-8 --gamma=-20 --video-unscaled=yes --mute=yes" DP-1 /home/n30/Videos/Hidamari/collapse_academy.mp4 & disown
+}
+
+dinos () {
+    mpvpaper -o "--loop --mute=yes --brightness=0  --contrast=10 --saturation=33 --hue=18 --gamma=-30" DP-1 "/run/media/n30/nvme_chivos/SteamLibrary/steamapps/workshop/content/431960/1326464700/2018-03-08 15-33-11.mp4" & disown
+}
+
+searchanddestroy () {
+    ps -ef | rg "mpvpaper" | rg -v rg | awk '{print $2}' | head -n -1 | xargs kill
+}
+
+ 
+#  mpvpaper -o "--loop --brightness=3  --contrast=6  --saturation=0  --hue=-8 --gamma=-20 --video-unscaled=yes --mute=yes" DP-1 /home/n30/Videos/Hidamari/mona.mp4 & disown
+
+case "$background_choice" in
+    "default" )
+        ps -ef | rg "record|blackhole" | rg -v rg | awk '{print $2}' | xargs kill
+        exit 0
+    ;;
+    "code")
+        gravity & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "music")
+        AlternateRealities & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "test")
+        searchanddestroy
+        floatinginspace & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "fifi")
+        searchanddestroy
+        fifi & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "doggo")
+        searchanddestroy
+        doggo & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "delorean")
+        searchanddestroy
+        delorean & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "galaxy")
+        searchanddestroy
+        galaxy & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "collapse_academy")
+        searchanddestroy
+        collapse_academy & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "dinos")
+        searchanddestroy
+        dinos & disown
+        sleep 2
+        searchanddestroy
+    ;;
+    "lock")
+        blackhole & disown
+        ps -ef | rg "record" | rg -v rg | awk '{print $2}' | xargs kill
+    ;;
+    *)
+        echo "invalid choice; choices: code | music | lock"
+        exit 1
+    ;;
+esac
+
+exit 0
+
+# ps -ef | rg "mpvpaper" | rg -v rg | awk '{print $2}' | xargs kill
+
+# This command is composed of several Unix command-line utilities that work together to find and kill a specific process by name. Here is an explanation of each command:
+
+#     ps -ef: This command lists all the currently running processes on the system in a table format. The -e option selects all processes, and the -f option gives full information about each process.
+
+#     rg "blackhole": This command searches for the string "blackhole" in the output of the previous ps command. rg is short for ripgrep, a command-line search tool that uses regular expressions by default.
+
+#     rg -v rg: This command filters out any lines that contain the string "rg", which is the command itself. This is done to exclude the rg command from the list of processes that contain the string "blackhole".
+
+#     awk '{print $2}': This command extracts the second column from the output of the previous command, which is the process ID (PID) of the processes that contain the string "blackhole". The awk command is a text processing utility that allows you to manipulate and extract data from structured text.
+
+#     xargs kill: This command takes the PID(s) from the previous command and passes it as an argument to the kill command, which sends a signal to the specified process(es) to terminate them. xargs is a utility that converts standard input into arguments to a command.
+
+# Therefore, this command searches for any running process that has "blackhole" in its name (presumably a mpvpaper process playing the blackhole video), extracts its PID, and then sends a kill signal to terminate the process. The purpose is to ensure that any previous instance of mpvpaper playing the blackhole video is terminated before running the blackhole function again to avoid conflicts or unexpected behavior.

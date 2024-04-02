@@ -1,0 +1,59 @@
+[file:///etc/fstab]
+Bookmarks=
+Checksum=1be8ec3f3b446559f39d53fc2b520277f7c04ca0
+Encoding=UTF-8
+Highlighting=fstab
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=fstab
+Mode Set By User=false
+Time=2023,12,3,2,43,11.37
+URL=file:///etc/fstab
+
+[file:///home/n30/Documents/Text File.txt]
+Bookmarks=
+Checksum=ce418f68072a903a0a2a894dbf8c87624b925620
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2023,12,3,2,43,11.37
+URL=file:///home/n30/Documents/Text File.txt
+
+[file:///run/media/nvme_chivos/.dotfiles/config/hypr/theme.ctl]
+Bookmarks=
+Checksum=c71ec220f647b0be4d7b2c0bf074ac88d7889dc3
+Encoding=UTF-8
+Highlighting=None
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=Normal
+Mode Set By User=false
+Time=2023,12,3,2,48,56.797
+URL=file:///run/media/nvme_chivos/.dotfiles/config/hypr/theme.ctl
+
+[file:///run/media/nvme_chivos/.dotfiles/config/kitty/kitty.conf]
+Bookmarks=
+Checksum=4b98df9d57fc8003c18f7057d367bbe12fdff586
+Encoding=UTF-8
+Highlighting=TOML
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=TOML
+Mode Set By User=false
+Time=2023,12,3,3,5,5.594
+URL=file:///run/media/nvme_chivos/.dotfiles/config/kitty/kitty.conf
+
+[file:///run/media/nvme_chivos/.dotfiles/config/qt5ct/qt5ct.conf]
+Bookmarks=
+Checksum=4145ed75b8e420c0bcea76bc78edb77cd8adc2e8
+Encoding=UTF-8
+Highlighting=TOML
+Highlighting Set By User=false
+Indentation Mode=normal
+Mode=TOML
+Mode Set By User=false
+Time=2023,12,3,3,4,23.664
+URL=file:///run/media/nvme_chivos/.dotfiles/config/qt5ct/qt5ct.conf

@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# NOTIFICATIONS (deadd)
+# killall -9 mako dunst swaync deadd-notification-center
+# sleep 0.5
+# if [[ ! $(pidof deadd-notification-center) ]]; then
+#     # deadd-notification-center
+# fi
+
+# -----------------------------------------------------
+# NOTIFICATIONS (mako)
+# CONFIG="$HOME/.config/mako/config"
+
+# if [[ ! $(pidof mako) ]]; then
+#   mako -c ${CONFIG}
+# fi
+# ------------------------------------------------------
+
+# NOTIFICATIONS (swaync)
+CONFIG="$HOME/.config/swaync/config.json"
+STYLE="$HOME/.config/swaync/style.css"
+
+killall -9 mako dunst swaync deadd-notification-center
+swaync -c ${CONFIG} -s ${STYLE}
+swaync -c $HOME/.config/swaync/config.json -s $HOME/.config/swaync/style.css
