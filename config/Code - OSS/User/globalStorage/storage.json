@@ -30,10 +30,10 @@
             "backupPath": "/home/n30/.config/Code - OSS/Backups/ce82f6cc5b8f3bff4d642450f5af7137",
             "uiState": {
                 "mode": 1,
-                "x": 2786,
+                "x": 2540,
                 "y": 54,
-                "width": 642,
-                "height": 909
+                "width": 888,
+                "height": 1374
             }
         },
         "openedWindows": []
@@ -100,6 +100,17 @@
                                     "id": "openRecentFile",
                                     "uri": {
                                         "$mid": 1,
+                                        "external": "file:///run/media/n30/nvme_chivos/.dotfiles/config/hypr/userprefs.conf",
+                                        "path": "/run/media/n30/nvme_chivos/.dotfiles/config/hypr/userprefs.conf",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "/run/media/n30/nvme_chivos/.dotfiles/config/hypr/userprefs.conf"
+                                },
+                                {
+                                    "id": "openRecentFile",
+                                    "uri": {
+                                        "$mid": 1,
                                         "external": "file:///run/media/n30/nvme_chivos/.dotfiles/.gitignore",
                                         "path": "/run/media/n30/nvme_chivos/.dotfiles/.gitignore",
                                         "scheme": "file"
@@ -128,17 +139,6 @@
                                     },
                                     "enabled": true,
                                     "label": "~/.config/Genymobile/Genymotion.conf"
-                                },
-                                {
-                                    "id": "openRecentFile",
-                                    "uri": {
-                                        "$mid": 1,
-                                        "external": "file:///run/media/n30/nvme_chivos/.dotfiles/config/hypr/userprefs.conf",
-                                        "path": "/run/media/n30/nvme_chivos/.dotfiles/config/hypr/userprefs.conf",
-                                        "scheme": "file"
-                                    },
-                                    "enabled": true,
-                                    "label": "/run/media/n30/nvme_chivos/.dotfiles/config/hypr/userprefs.conf"
                                 },
                                 {
                                     "id": "openRecentFile",
@@ -196,7 +196,8 @@
                     },
                     {
                         "id": "saveAll",
-                        "label": "Save A&&ll"
+                        "label": "Save A&&ll",
+                        "enabled": false
                     },
                     {
                         "id": "vscode.menubar.separator"
@@ -842,7 +843,8 @@
                     },
                     {
                         "id": "editor.action.toggleWordWrap",
-                        "label": "&&Word Wrap"
+                        "label": "&&Word Wrap",
+                        "checked": true
                     }
                 ]
             },
