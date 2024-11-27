@@ -1,3 +1,5 @@
-audio.play_bitrate_non_metered_migrated=true
 audio.crossfade_v2=true
+audio.play_bitrate_non_metered_migrated=true
 video.subtitles="en-US"
+audio.play_bitrate_enumeration=4
+audio.play_bitrate_non_metered_enumeration=4

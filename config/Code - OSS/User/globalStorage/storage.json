@@ -30,10 +30,11 @@
             "backupPath": "/home/n30/.config/Code - OSS/Backups/ce82f6cc5b8f3bff4d642450f5af7137",
             "uiState": {
                 "mode": 1,
-                "x": 2540,
-                "y": 54,
-                "width": 888,
-                "height": 1374
+                "x": 2305,
+                "y": 52,
+                "width": 1125,
+                "height": 793,
+                "zoomLevel": 0
             }
         },
         "openedWindows": []
@@ -95,6 +96,17 @@
                                 },
                                 {
                                     "id": "vscode.menubar.separator"
+                                },
+                                {
+                                    "id": "openRecentFile",
+                                    "uri": {
+                                        "$mid": 1,
+                                        "external": "file:///run/media/n30/nvme_chivos/.dotfiles/config/hypr/hyprland.conf",
+                                        "path": "/run/media/n30/nvme_chivos/.dotfiles/config/hypr/hyprland.conf",
+                                        "scheme": "file"
+                                    },
+                                    "enabled": true,
+                                    "label": "/run/media/n30/nvme_chivos/.dotfiles/config/hypr/hyprland.conf"
                                 },
                                 {
                                     "id": "openRecentFile",
@@ -1737,19 +1749,19 @@
         }
     },
     "theme": "vs-dark",
-    "themeBackground": "#1f1f1f",
+    "themeBackground": "#292d3e",
     "windowSplash": {
         "zoomLevel": -1,
         "baseTheme": "vs-dark",
         "colorInfo": {
-            "foreground": "#cccccc",
-            "background": "#1f1f1f",
-            "editorBackground": "#1f1f1f",
-            "titleBarBackground": "#181818",
-            "activityBarBackground": "#181818",
-            "sideBarBackground": "#181818",
-            "statusBarBackground": "#181818",
-            "statusBarNoFolderBackground": "#1f1f1f"
+            "foreground": "#babed8",
+            "background": "#292d3e",
+            "editorBackground": "#292d3e",
+            "titleBarBackground": "#292d3e",
+            "activityBarBackground": "#292d3e",
+            "sideBarBackground": "#292d3e",
+            "statusBarBackground": "#292d3e",
+            "statusBarNoFolderBackground": "#292d3e"
         },
         "layoutInfo": {
             "sideBarSide": "left",

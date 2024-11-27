@@ -1332,6 +1332,15 @@ env = WLR_NO_HARDWARE_CURSORS,1
 
 - Reboot your computer
 
+ls /usr/lib/modules
+ 6.8.2-arch2-1
+
+mkinitcpio -c /etc/mkinitcpio.conf -g /boot/initramfs-linux.img -k 6.8.2-arch2-1
+
+yay -S linux
+
+ls /etc/mkinitcpio.d/
+
 
 ## Fixing random flickering, (nuclear method)[](https://wiki.hyprland.org/Nvidia/#fixing-random-flickering-nuclear-method)
 
@@ -3518,6 +3527,9 @@ gamescope -W 3440 -H 1440 -f -e -- mangohud %command%
 
 gamescope -w 3440 -h 1440 -f -r 60 -- steam steam://rungameid/238960
 
+STALKER HEARTH OF CHORNOBYL
+gamescope -w 3440 -h 1440 -f -r 144 -- steam steam://rungameid/1643320
+
 > # **[Wine Dependency Hell Solver](https://github.com/FanderWasTaken/wine-dependency-hell-solver)**
 This is a script that functions similarly to how Valve's installscript.vdf does. It installs dependencies for games to work properly. However, not every game comes with all the required dependencies. So I decided to write a universal script to install every single dependency any game may require to work.
 
@@ -4762,7 +4774,7 @@ git config --global credential.helper store
 one line to rule them all:
 
 `
-cd /run/media/n30/nvme_chivos/.dotfiles/ && git commit -m 'mergin with previous usefull sauropods theme' && git push origin main
+cd /run/media/n30/nvme_chivos/.dotfiles/ && git commit -m 'returning because amd 6800 xt' && git push origin main
 `
 
 - [GitHub Error: Authentication Failed from the Command Line](https://ginnyfahs.medium.com/github-error-authentication-failed-from-command-line-3a545bfd0ca8)
@@ -7042,3 +7054,967 @@ bash makeme
 ---
 19.7121221
 -101.20355176
+
+
+---
+
+❯ yay -Syyu
+[sudo] password for n30: 
+:: Synchronizing package databases...
+ endeavouros                        14.2 KiB  4.09 KiB/s 00:03 [----------------------------------] 100%
+ core                              121.6 KiB   172 KiB/s 00:01 [----------------------------------] 100%
+ extra                               7.9 MiB  2.49 MiB/s 00:03 [----------------------------------] 100%
+ multilib                          138.9 KiB   191 KiB/s 00:01 [----------------------------------] 100%
+ rumpowered                          3.2 KiB  8.25 KiB/s 00:00 [----------------------------------] 100%
+:: Searching AUR for updates...
+ -> No AUR package found for electron33
+:: Searching databases for updates...
+ -> Packages not in AUR: dbus-python  kpeoplevcard  kquickcharts5  nwg-displays
+ -> Missing AUR Debug Packages: swww-debug  visual-studio-code-bin-debug  wlr-randr-debug
+ -> Orphan (unmaintained) AUR Packages: discocss-git
+ -> bindtointerface: local (4b03914-2) is newer than AUR (1.0-1)
+:: 11 dependencies will also be installed for this operation.
+    extra/acpica                -> 20240321-1
+    (make dependency of ventoy)
+    extra/cdrtools              -> 3.02a09-5
+    (make dependency of ventoy)
+    extra/electron31            -> 31.1.0-1
+    extra/fast_float            -> 6.1.0-2
+    (make dependency of libpdfium-nojs)
+    extra/gdb                   -> 14.2-2
+    (make dependency of hyprpicker-git)
+    extra/kernel-headers-musl   -> 4.19.88-2
+    (make dependency of ventoy)
+    extra/libdecor              -> 0.2.2-1
+    extra/libguestfs            -> 1.52.0-6
+    (make dependency of ventoy)
+    extra/moreutils             -> 0.69-2
+    (make dependency of balena-etcher)
+    extra/musl                  -> 1.2.5-1
+    (make dependency of ventoy)
+    extra/python-setuptools     -> 1:69.0.3-6
+    (make dependency of ventoy, safeeyes-git, ...)
+
+:: 810 packages to upgrade/install.
+810  endeavouros/downgrade                 11.3.0-1                        -> 11.4.2-1
+809  endeavouros/endeavouros-mirrorlist    24.2-1                          -> 24.10-1
+808  endeavouros/endeavouros-theming       23.11.2.1-1                     -> 24.06.1.1-1
+807  endeavouros/eos-apps-info             24.2-1                          -> 24.8.2-1
+806  endeavouros/eos-bash-shared           24.16.3-1                       -> 24.16.25-1
+805  endeavouros/eos-dracut                1.3-1                           -> 1.4-1
+804  endeavouros/eos-hooks                 1.15-1                          -> 1.16-1
+803  endeavouros/eos-log-tool              23-3                            -> 24.8.1-1
+802  endeavouros/eos-packagelist           2.2.1-1                         -> 2.3.1-1
+801  endeavouros/eos-rankmirrors           24.2-1                          -> 24.9.2-1
+800  endeavouros/eos-translations          24.2-1                          -> 24.8-1
+799  endeavouros/eos-update-notifier       24.1-1                          -> 24.7.1-1
+798  endeavouros/reflector-simple          2023-4                          -> 2024.8.1-1
+797  endeavouros/welcome                   24.5.2-1                        -> 24.10-1
+796  endeavouros/yad                       13.0-2.1                        -> 14.1-2.1
+795  endeavouros/yay                       12.3.5-1                        -> 12.4.2-1
+794  core/audit                            4.0.1-2                         -> 4.0.1-3
+793  core/binutils                         2.42-2                          -> 2.42+r91+g6224493e457-1
+792  core/brotli                           1.1.0-1                         -> 1.1.0-2
+791  core/btrfs-progs                      6.8-2                           -> 6.9.2-1
+790  core/ca-certificates                  20220905-1                      -> 20240618-1
+789  core/ca-certificates-mozilla          3.99-1                          -> 3.101.1-1
+788  core/ca-certificates-utils            20220905-1                      -> 20240618-1
+787  core/cryptsetup                       2.7.1-1                         -> 2.7.3-1
+786  core/curl                             8.7.1-5                         -> 8.8.0-1
+785  core/db5.3                            5.3.28-4                        -> 5.3.28-5
+784  core/dbus-broker                      35-2                            -> 36-2
+783  core/dbus-broker-units                35-2                            -> 36-2
+782  core/debugedit                        5.0-5                           -> 5.0-6
+781  core/device-mapper                    2.03.23-3                       -> 2.03.24-1
+780  core/e2fsprogs                        1.47.0-2                        -> 1.47.1-4
+779  core/fakeroot                         1.34-1                          -> 1.35-1
+778  core/filesystem                       2024.01.19-1                    -> 2024.04.07-1
+777  core/findutils                        4.9.0-3                         -> 4.10.0-1
+776  core/gcc                              13.2.1-5                        -> 14.1.1+r58+gfc9fb69ad62-1
+775  core/gcc-libs                         13.2.1-5                        -> 14.1.1+r58+gfc9fb69ad62-1
+774  core/gettext                          0.22.4-1                        -> 0.22.5-1
+773  core/glib2                            2.80.0-2                        -> 2.80.3-2
+772  core/glibc                            2.39-1                          -> 2.39+r52+gf8e4623421-1
+771  core/gmp                              6.3.0-1                         -> 6.3.0-2
+770  core/gnutls                           3.8.4-1                         -> 3.8.5-1
+769  core/gpgme                            1.23.2-1                        -> 1.23.2-4
+768  core/groff                            1.23.0-5                        -> 1.23.0-6
+767  core/guile                            3.0.9-1                         -> 3.0.10-1
+766  core/hwdata                           0.380-1                         -> 0.383-1
+765  core/iana-etc                         20240222-1                      -> 20240412-1
+764  core/icu                              74.2-2                          -> 75.1-1
+763  core/iproute2                         6.8.0-1                         -> 6.9.0-1
+762  core/jansson                          2.14-3                          -> 2.14-4
+761  core/less                             1:643-1                         -> 1:643-2
+760  core/lib32-gcc-libs                   13.2.1-5                        -> 14.1.1+r58+gfc9fb69ad62-1
+759  core/lib32-glibc                      2.39-1                          -> 2.39+r52+gf8e4623421-1
+758  core/libarchive                       3.7.2-2                         -> 3.7.4-1
+757  core/libassuan                        2.5.7-1                         -> 2.5.7-2
+756  core/libbpf                           1.3.0-1                         -> 1.4.2-1
+755  core/libcap                           2.69-4                          -> 2.70-1
+754  core/libcap-ng                        0.8.4-1                         -> 0.8.5-2
+753  core/libcurl-gnutls                   8.7.1-5                         -> 8.8.0-1
+752  core/libedit                          20230828_3.1-1                  -> 20240517_3.1-1
+751  core/libelf                           0.191-1                         -> 0.191-3
+750  core/libgcrypt                        1.10.3-1                        -> 1.11.0-2
+749  core/libgpg-error                     1.48-1                          -> 1.50-1
+748  core/libisl                           0.26-1                          -> 0.26-2
+747  core/libksba                          1.6.6-1                         -> 1.6.7-1
+746  core/libldap                          2.6.7-1                         -> 2.6.8-1
+745  core/libnghttp2                       1.60.0-1                        -> 1.62.1-1
+744  core/libnghttp3                       1.2.0-1                         -> 1.4.0-1
+743  core/libpsl                           0.21.2-1                        -> 0.21.5-2
+742  core/libseccomp                       2.5.5-2                         -> 2.5.5-3
+741  core/libtool                          2.4.7+4+g1ec8fa28-7             -> 2.5.0+14+g9a4a0261-1
+740  core/libxml2                          2.12.6-1                        -> 2.13.1-1
+739  core/linux                            6.8.2.arch2-1                   -> 6.9.7.arch1-1
+738  core/linux-api-headers                6.7-1                           -> 6.8-1
+737  core/linux-firmware                   20240312.3b128b60-1             -> 20240610.9c10a208-1
+736  core/linux-firmware-whence            20240312.3b128b60-1             -> 20240610.9c10a208-1
+735  core/linux-headers                    6.8.2.arch2-1                   -> 6.9.7.arch1-1
+734  core/lvm2                             2.03.23-3                       -> 2.03.24-1
+733  core/man-db                           2.12.0-1                        -> 2.12.1-1
+732  core/man-pages                        6.7-1                           -> 6.9.1-1
+731  core/minizip                          1:1.3.1-1                       -> 1:1.3.1-2
+730  core/mkinitcpio                       38.1-1                          -> 39.2-2
+729  core/mpfr                             4.2.1-2                         -> 4.2.1-3
+728  core/nano                             7.2-1                           -> 8.0-1
+727  core/ncurses                          6.4_20230520-1                  -> 6.5-3
+726  core/nettle                           3.9.1-1                         -> 3.10-1
+725  core/nilfs-utils                      2.2.10-1                        -> 2.2.11-1
+724  core/nspr                             4.35-2                          -> 4.35-3
+723  core/nss                              3.99-1                          -> 3.101.1-1
+722  core/openssh                          9.7p1-1                         -> 9.8p1-1
+721  core/openssl                          3.2.1-1                         -> 3.3.1-1
+720  core/pam                              1.6.0-4                         -> 1.6.1-2
+719  core/pciutils                         3.11.1-1                        -> 3.13.0-1
+718  core/pcre2                            10.43-2                         -> 10.44-1
+717  core/python                           3.11.8-1                        -> 3.12.4-1
+716  core/python-brotli                    1.1.0-1                         -> 1.1.0-2
+715  core/python-capng                     0.8.4-1                         -> 0.8.5-2
+714  core/sqlite                           3.45.2-1                        -> 3.46.0-1
+713  core/systemd                          255.4-2                         -> 256.1-1
+712  core/systemd-libs                     255.4-2                         -> 256.1-1
+711  core/systemd-resolvconf               255.4-2                         -> 256.1-1
+710  core/systemd-sysvcompat               255.4-2                         -> 256.1-1
+709  core/tzdata                           2024a-1                         -> 2024a-2
+708  core/util-linux                       2.40-2                          -> 2.40.1-1
+707  core/util-linux-libs                  2.40-2                          -> 2.40.1-1
+706  core/xfsprogs                         6.6.0-1                         -> 6.8.0-2
+705  core/xz                               5.6.1-3                         -> 5.6.2-1
+704  core/zlib                             1:1.3.1-1                       -> 1:1.3.1-2
+703  core/zstd                             1.5.5-1                         -> 1.5.6-1
+702  extra/aalib                           1.4rc5-17                       -> 1.4rc5-18
+701  extra/abseil-cpp                      20240116.1-1                    -> 20240116.2-2
+700  extra/accountsservice                 23.13.9-1                       -> 23.13.9-2
+699  extra/adwaita-cursors                 46.0-1                          -> 46.2-1
+698  extra/adwaita-icon-theme              46.0-1                          -> 46.2-1
+697  extra/alsa-card-profiles              1:1.0.4-4                       -> 1:1.2.0-2
+696  extra/alsa-lib                        1.2.11-1                        -> 1.2.12-1
+695  extra/alsa-plugins                    1:1.2.7.1-2                     -> 1:1.2.12-2
+694  extra/alsa-ucm-conf                   1.2.11-1                        -> 1.2.12-1
+693  extra/alsa-utils                      1.2.11-1                        -> 1.2.12-1
+692  extra/aom                             3.8.2-1                         -> 3.9.1-1
+691  extra/appstream                       1.0.2-1                         -> 1.0.3-1
+690  extra/appstream-glib                  0.8.2-4                         -> 0.8.3-1
+689  extra/ardour                          8.4-1                           -> 8.6-1
+688  extra/ark                             24.02.1-1                       -> 24.05.1-1
+687  extra/asciidoctor                     2.0.21-1                        -> 2.0.23-1
+686  extra/attica                          6.0.0-1                         -> 6.3.0-1
+685  extra/attica5                         5.115.0-1                       -> 5.116.0-1
+684  extra/aubio                           0.4.9-16                        -> 0.4.9-19
+683  extra/autoconf-archive                1:2023.02.20-1                  -> 1:2023.02.20-2
+682  extra/avahi                           1:0.8+r194+g3f79789-1           -> 1:0.8+r194+g3f79789-2
+681  extra/ayatana-ido                     0.10.1-1                        -> 0.10.2-1
+680  extra/baloo                           6.0.0-3                         -> 6.3.0-1
+679  extra/baloo-widgets                   24.02.1-1                       -> 24.05.1-1
+678  extra/bash-completion                 2.11-3                          -> 2.14.0-2
+677  extra/benchmark                       1.8.3-1                         -> 1.8.4-1
+676  extra/bind                            9.18.25-1                       -> 9.18.27-1
+675  extra/bitwarden                       2024.3.0-1                      -> 2024.6.2-1
+674  extra/blas                            3.12.0-3                        -> 3.12.0-5
+673  extra/blueman                         2.4-1                           -> 2.4.2-1
+672  extra/bluez                           5.73-4                          -> 5.76-1
+671  extra/bluez-libs                      5.73-4                          -> 5.76-1
+670  extra/bluez-utils                     5.73-4                          -> 5.76-1
+669  extra/boost                           1.83.0-5                        -> 1.83.0-9
+668  extra/boost-libs                      1.83.0-5                        -> 1.83.0-9
+667  extra/botan                           3.3.0-1                         -> 3.4.0-2
+666  extra/c-ares                          1.28.1-1                        -> 1.29.0-1
+665  extra/calibre                         7.7.0-2                         -> 7.13.0-1
+664  extra/cbindgen                        0.26.0-1                        -> 0.26.0-2
+663  extra/cblas                           3.12.0-3                        -> 3.12.0-5
+662  extra/chromaprint                     1.5.1-7                         -> 1.5.1-8
+661  extra/chrono-date                     3.0.1-3                         -> 3.0.1-4
+660  extra/cifs-utils                      7.0-3                           -> 7.0-4
+659  extra/clang                           17.0.6-1                        -> 17.0.6-2
+658  extra/cmake                           3.29.1-1                        -> 3.29.6-1
+657  extra/code                            1.87.2-1                        -> 1.90.0-1
+656  extra/compiler-rt                     17.0.6-1                        -> 17.0.6-2
+655  extra/convertlit                      1.8-11                          -> 1.8-12
+654  extra/copyq                           8.0.0-1                         -> 9.0.0-1
+653  extra/cowsay                          3.04-4                          -> 3.04-5
+652  extra/cppdap                          1.58.0-1                        -> 1.58.0-2
+651  extra/dav1d                           1.4.1-1                         -> 1.4.3-1
+650  extra/dhclient                        4.4.3.P1-2                      -> 4.4.3.P1-3
+649  extra/discord                         0.0.47-2                        -> 0.0.58-1
+648  extra/dolphin                         24.02.1-1                       -> 24.05.1-1
+647  extra/double-conversion               3.3.0-1                         -> 3.3.0-2
+646  extra/doxygen                         1.10.0-3                        -> 1.11.0-3
+645  extra/dracut                          059-6                           -> 102-1
+644  extra/dump_syms                       2.3.1-2                         -> 2.3.3-1
+643  extra/dunst                           1.10.0-1                        -> 1.11.0-1
+642  extra/easyeffects                     7.1.6-1                         -> 7.1.7-1
+641  extra/ebook-tools                     0.2.2-7                         -> 0.2.2-8
+640  extra/editorconfig-core-c             0.12.7-1                        -> 0.12.9-1
+639  extra/egl-wayland                     2:1.1.13-1                      -> 2:1.1.13-2
+638  extra/eglexternalplatform             1.1-2                           -> 1.1-3
+637  extra/electron27                      27.3.9-1                        -> 27.3.11-6
+636  extra/electron28                      28.2.9-2                        -> 28.3.3-2
+635  extra/ell                             0.64-2                          -> 0.66-1
+634  extra/enchant                         2.6.5-1                         -> 2.8.0-1
+633  extra/ethtool                         1:6.7-1                         -> 1:6.9-1
+632  extra/exfatprogs                      1.2.2-1                         -> 1.2.4-1
+631  extra/exiv2                           0.28.2-3                        -> 0.28.2-4
+630  extra/extra-cmake-modules             6.0.0-1                         -> 6.3.0-1
+629  extra/eza                             0.18.9-2                        -> 0.18.21-1
+628  extra/ffmpeg                          2:6.1.1-7                       -> 2:7.0.1-1
+627  extra/ffmpeg4.4                       4.4.4-5                         -> 4.4.4-6
+626  extra/ffmpegthumbnailer               2.2.2-5                         -> 2.2.2-6
+625  extra/ffmpegthumbs                    24.02.1-1                       -> 24.05.1-2
+624  extra/ffnvcodec-headers               12.1.14.0-1                     -> 12.2.72.0-1
+623  extra/fftw                            3.3.10-6                        -> 3.3.10-7
+622  extra/filelight                       24.02.1-1                       -> 24.05.1-1
+621  extra/firefox                         124.0.2-1                       -> 127.0.2-1
+620  extra/firewalld                       2.1.1-1                         -> 2.1.2-3
+619  extra/foot                            1.17.0-1                        -> 1.17.2-1
+618  extra/freeglut                        3.4.0-1                         -> 3.6.0-1
+617  extra/freetype2                       2.13.2-1                        -> 2.13.2-2
+616  extra/fribidi                         1.0.13-2                        -> 1.0.15-1
+615  extra/fzf                             0.48.1-1                        -> 0.53.0-1
+614  extra/gcr-4                           4.2.1-2                         -> 4.3.0-1
+613  extra/gdk-pixbuf2                     2.42.10-2                       -> 2.42.12-1
+612  extra/geoclue                         2.7.1-2                         -> 2.7.1-3
+611  extra/ghostscript                     10.03.0-2                       -> 10.03.1-1
+610  extra/git                             2.44.0-1                        -> 2.45.2-1
+609  extra/glances                         3.4.0.5-2                       -> 4.1.1-1
+608  extra/glm                             1.0.0-3                         -> 1.0.1-1
+607  extra/glslang                         14.0.0-2                        -> 14.2.0-1
+606  extra/gn                              0.2157.22581fb4-1               -> 0.2174.b3a0bff4-1
+605  extra/gnome-calculator                46.0-1                          -> 46.1-1
+604  extra/go                              2:1.22.2-1                      -> 2:1.22.4-1
+603  extra/gobject-introspection           1.80.1-1                        -> 1.80.1-3
+602  extra/gobject-introspection-runtime   1.80.1-1                        -> 1.80.1-3
+601  extra/graphviz                        10.0.1-1                        -> 11.0.0-1
+600  extra/gsettings-desktop-schemas       46.0-1                          -> 46.0-2
+599  extra/gsl                             2.7.1-3                         -> 2.8-1
+598  extra/gspell                          1.12.2-2                        -> 1.12.2-3
+597  extra/gst-libav                       1.24.1-2                        -> 1.24.5-2
+596  extra/gst-plugin-pipewire             1:1.0.4-4                       -> 1:1.2.0-2
+595  extra/gst-plugins-bad                 1.24.1-2                        -> 1.24.5-2
+594  extra/gst-plugins-bad-libs            1.24.1-2                        -> 1.24.5-2
+593  extra/gst-plugins-base                1.24.1-2                        -> 1.24.5-2
+592  extra/gst-plugins-base-libs           1.24.1-2                        -> 1.24.5-2
+591  extra/gst-plugins-good                1.24.1-2                        -> 1.24.5-2
+590  extra/gst-plugins-ugly                1.24.1-2                        -> 1.24.5-2
+589  extra/gstreamer                       1.24.1-2                        -> 1.24.5-2
+588  extra/gstreamer-vaapi                 1.24.1-2                        -> 1.24.5-2
+587  extra/gtk-update-icon-cache           1:4.14.2-1                      -> 1:4.14.4-1
+586  extra/gtk2                            2.24.33-3                       -> 2.24.33-4
+585  extra/gtk3                            1:3.24.41-1                     -> 1:3.24.42-1
+584  extra/gtk4                            1:4.14.2-1                      -> 1:4.14.4-1
+583  extra/gtksourceview5                  5.12.0-1                        -> 5.12.1-1
+582  extra/harfbuzz                        8.4.0-1                         -> 9.0.0-1
+581  extra/harfbuzz-icu                    8.4.0-1                         -> 9.0.0-1
+580  extra/haveged                         1.9.18-1                        -> 1.9.18-2
+579  extra/hicolor-icon-theme              0.17-3                          -> 0.18-1
+578  extra/highway                         1.1.0-1                         -> 1.2.0-1
+577  extra/hwdetect                        2024.03.05-1                    -> 2024.04.14.2206-1
+576  extra/hyprcursor                      0.1.5-1                         -> 0.1.9-1
+575  extra/hyprland                        0.38.0-1                        -> 0.41.2-1
+574  extra/hyprlang                        0.5.0-1                         -> 0.5.2-1
+573  extra/imagemagick                     7.1.1.29-2                      -> 7.1.1.34-1
+572  extra/imake                           1.0.10-1                        -> 1.0.10-2
+571  extra/imath                           3.1.11-1                        -> 3.1.11-2
+570  extra/iniparser                       4.1-5                           -> 4.2.4-1
+569  extra/intel-ucode                     20240312-1                      -> 20240531-1
+568  extra/inxi                            3.3.33.1-1                      -> 3.3.35.1-1
+567  extra/iwd                             2.17-2                          -> 2.18-1
+566  extra/jasper                          4.2.1-1                         -> 4.2.4-1
+565  extra/jbigkit                         2.1-7                           -> 2.1-8
+564  extra/jdk-openjdk                     22.u36-1                        -> 22.0.1.u0-1
+563  extra/jemalloc                        1:5.3.0-3                       -> 1:5.3.0-4
+562  extra/jq                              1.7.1-1                         -> 1.7.1-2
+561  extra/json-glib                       1.8.0-1                         -> 1.8.0-2
+560  extra/kactivities5                    5.115.0-1                       -> 5.116.0-1
+559  extra/karchive                        6.0.0-1                         -> 6.3.0-1
+558  extra/karchive5                       5.115.0-1                       -> 5.116.0-1
+557  extra/kate                            24.02.1-1                       -> 24.05.1-1
+556  extra/kauth                           6.0.0-2                         -> 6.3.0-1
+555  extra/kauth5                          5.115.0-1                       -> 5.116.0-1
+554  extra/kbookmarks                      6.0.0-1                         -> 6.3.0-1
+553  extra/kbookmarks5                     5.115.0-1                       -> 5.116.0-1
+552  extra/kcmutils                        6.0.0-2                         -> 6.3.0-1
+551  extra/kcmutils5                       5.115.0-1                       -> 5.116.0-1
+550  extra/kcodecs                         6.0.0-1                         -> 6.3.0-1
+549  extra/kcodecs5                        5.115.0-1                       -> 5.116.0-1
+548  extra/kcolorscheme                    6.0.0-1                         -> 6.3.0-1
+547  extra/kcompletion                     6.0.0-1                         -> 6.3.0-1
+546  extra/kcompletion5                    5.115.0-1                       -> 5.116.0-1
+545  extra/kconfig                         6.0.0-1                         -> 6.3.0-1
+544  extra/kconfig5                        5.115.0-1                       -> 5.116.0-1
+543  extra/kconfigwidgets                  6.0.0-1                         -> 6.3.0-1
+542  extra/kconfigwidgets5                 5.115.0-1                       -> 5.116.0-1
+541  extra/kcontacts                       1:6.0.0-1                       -> 1:6.3.0-1
+540  extra/kcontacts5                      5.115.0-1                       -> 5.116.0-1
+539  extra/kcoreaddons                     6.0.0-1                         -> 6.3.0-1
+538  extra/kcoreaddons5                    5.115.0-1                       -> 5.116.0-1
+537  extra/kcrash                          6.0.0-1                         -> 6.3.0-1
+536  extra/kcrash5                         5.115.0-1                       -> 5.116.0-1
+535  extra/kdbusaddons                     6.0.0-1                         -> 6.3.0-1
+534  extra/kdbusaddons5                    5.115.0-1                       -> 5.116.0-1
+533  extra/kde-cli-tools                   6.0.3-1                         -> 6.1.1-1
+532  extra/kde-gtk-config                  6.0.3-2                         -> 6.1.1-1
+531  extra/kdeclarative                    6.0.0-1                         -> 6.3.0-1
+530  extra/kdeclarative5                   5.115.0-1                       -> 5.116.0-1
+529  extra/kdeconnect                      24.02.1-1                       -> 24.05.1-1
+528  extra/kdecoration                     6.0.3-1                         -> 6.1.1-1
+527  extra/kded5                           5.115.0-1                       -> 5.116.0-1
+526  extra/kdesu                           6.0.0-1                         -> 6.3.0-1
+525  extra/kdesu5                          5.115.0-1                       -> 5.116.0-1
+524  extra/kdnssd                          6.0.0-1                         -> 6.3.0-1
+523  extra/kdnssd5                         5.115.0-1                       -> 5.116.0-1
+522  extra/kfilemetadata                   6.0.0-2                         -> 6.3.0-2
+521  extra/kfilemetadata5                  5.115.0-1                       -> 5.116.0-2
+520  extra/kglobalaccel                    6.0.0-1                         -> 6.3.0-1
+519  extra/kglobalaccel5                   5.115.0-3                       -> 5.116.0-1
+518  extra/kguiaddons                      6.0.0-2                         -> 6.3.0-1
+517  extra/kguiaddons5                     5.115.0-2                       -> 5.116.0-1
+516  extra/ki18n                           6.0.0-1                         -> 6.3.0-1
+515  extra/ki18n5                          5.115.1-1                       -> 5.116.0-1
+514  extra/kiconthemes                     6.0.0-1                         -> 6.3.0-1
+513  extra/kiconthemes5                    5.115.0-1                       -> 5.116.0-1
+512  extra/kidletime                       6.0.0-1                         -> 6.3.0-1
+511  extra/kidletime5                      5.115.0-1                       -> 5.116.0-1
+510  extra/kio                             6.0.0-2                         -> 6.3.0-1
+509  extra/kio-extras                      24.02.1-1                       -> 24.05.1-1
+508  extra/kio5                            5.115.0-3                       -> 5.116.0-1
+507  extra/kirigami                        6.0.0-2                         -> 6.3.0-1
+506  extra/kirigami-addons                 1.1.0-1                         -> 1.3.0-1
+505  extra/kirigami2                       5.115.0-1                       -> 5.116.0-1
+504  extra/kitemmodels                     6.0.0-1                         -> 6.3.0-1
+503  extra/kitemmodels5                    5.115.0-1                       -> 5.116.0-1
+502  extra/kitemviews                      6.0.0-1                         -> 6.3.0-1
+501  extra/kitemviews5                     5.115.0-1                       -> 5.116.0-1
+500  extra/kitty                           0.33.1-3                        -> 0.35.2-1
+499  extra/kitty-shell-integration         0.33.1-3                        -> 0.35.2-1
+498  extra/kitty-terminfo                  0.33.1-3                        -> 0.35.2-1
+497  extra/kjobwidgets                     6.0.0-1                         -> 6.3.0-1
+496  extra/kjobwidgets5                    5.115.0-1                       -> 5.116.0-1
+495  extra/knewstuff                       6.0.0-5                         -> 6.3.0-1
+494  extra/knewstuff5                      5.115.0-1                       -> 5.116.0-1
+493  extra/knotifications                  6.0.0-1                         -> 6.3.0-1
+492  extra/knotifications5                 5.115.0-1                       -> 5.116.0-1
+491  extra/kpackage                        6.0.0-1                         -> 6.3.0-1
+490  extra/kpackage5                       5.115.0-1                       -> 5.116.0-1
+489  extra/kparts                          6.0.0-1                         -> 6.3.0-1
+488  extra/kparts5                         5.115.0-1                       -> 5.116.0-1
+487  extra/kpeople                         6.0.0-1                         -> 6.3.0-1
+486  extra/kpeople5                        5.115.0-1                       -> 5.116.0-1
+485  extra/kpmcore                         24.02.1-1                       -> 24.05.1-1
+484  extra/kpty                            6.0.0-1                         -> 6.3.0-1
+483  extra/kpty5                           5.115.0-1                       -> 5.116.0-1
+482  extra/kquickcharts                    6.0.0-1                         -> 6.3.0-1
+481  extra/krunner                         6.0.0-1                         -> 6.3.0-1
+480  extra/kservice                        6.0.0-1                         -> 6.3.0-1
+479  extra/kservice5                       5.115.0-1                       -> 5.116.0-1
+478  extra/kstatusnotifieritem             6.0.0-2                         -> 6.3.0-1
+477  extra/ksvg                            6.0.0-1                         -> 6.3.1-1
+476  extra/ktexteditor                     6.0.0-2                         -> 6.3.0-1
+475  extra/ktextwidgets                    6.0.0-1                         -> 6.3.0-1
+474  extra/ktextwidgets5                   5.115.0-1                       -> 5.116.0-1
+473  extra/kuserfeedback                   6.0.0-2                         -> 6.3.0-1
+472  extra/kvantum                         1.1.0-1                         -> 1.1.2-1
+471  extra/kwallet                         6.0.0-3                         -> 6.3.0-1
+470  extra/kwallet5                        5.115.0-2                       -> 5.116.0-1
+469  extra/kwidgetsaddons                  6.0.0-1                         -> 6.3.0-1
+468  extra/kwidgetsaddons5                 5.115.0-1                       -> 5.116.0-1
+467  extra/kwindowsystem                   6.0.0-1                         -> 6.3.0-1
+466  extra/kwindowsystem5                  5.115.0-1                       -> 5.116.0-1
+465  extra/kxmlgui                         6.0.0-1                         -> 6.3.0-1
+464  extra/kxmlgui5                        5.115.0-1                       -> 5.116.0-1
+463  extra/lapack                          3.12.0-3                        -> 3.12.0-5
+462  extra/ldb                             2:2.9.0-2                       -> 2:2.9.1-1
+461  extra/lf                              31-1                            -> 32-1
+460  extra/libadwaita                      1:1.5.0-1                       -> 1:1.5.2-1
+459  extra/libass                          0.17.1-4                        -> 0.17.2-1
+458  extra/libavif                         1.0.4-2                         -> 1.0.4-4
+457  extra/libblockdev                     3.1.1-1                         -> 3.1.1-2
+456  extra/libblockdev-crypto              3.1.1-1                         -> 3.1.1-2
+455  extra/libblockdev-fs                  3.1.1-1                         -> 3.1.1-2
+454  extra/libblockdev-loop                3.1.1-1                         -> 3.1.1-2
+453  extra/libblockdev-mdraid              3.1.1-1                         -> 3.1.1-2
+452  extra/libblockdev-nvme                3.1.1-1                         -> 3.1.1-2
+451  extra/libblockdev-part                3.1.1-1                         -> 3.1.1-2
+450  extra/libblockdev-swap                3.1.1-1                         -> 3.1.1-2
+449  extra/libbsd                          0.12.2-1                        -> 0.12.2-2
+448  extra/libbytesize                     2.8-2                           -> 2.8-3
+447  extra/libcaca                         0.99.beta20-2                   -> 0.99.beta20-4
+446  extra/libcamera                       0.2.0-1                         -> 0.3.0-1
+445  extra/libcamera-ipa                   0.2.0-1                         -> 0.3.0-1
+444  extra/libcdio-paranoia                10.2+2.0.1-3                    -> 10.2+2.0.2-1
+443  extra/libcups                         1:2.4.7-2                       -> 2:2.4.10-1
+442  extra/libde265                        1.0.15-1                        -> 1.0.15-2
+441  extra/libdeflate                      1.20-1                          -> 1.20-2
+440  extra/libdisplay-info                 0.1.1-3                         -> 0.2.0-1
+439  extra/libdovi                         3.3.0-1                         -> 3.3.0-2
+438  extra/libdrm                          2.4.120-1                       -> 2.4.122-1
+437  extra/libev                           4.33-2                          -> 4.33-3
+436  extra/libevdev                        1.13.1-1                        -> 1.13.2-1
+435  extra/libgirepository                 1.80.1-1                        -> 1.80.1-3
+434  extra/libgit2                         1:1.7.2-1                       -> 1:1.8.1-1
+433  extra/libgtop                         2.41.3-1                        -> 2.41.3-2
+432  extra/libgusb                         0.4.8-1                         -> 0.4.9-1
+431  extra/libheif                         1.17.6-5                        -> 1.17.6-6
+430  extra/libical                         3.0.18-1                        -> 3.0.18-2
+429  extra/libimagequant                   4.3.0-1                         -> 4.3.1-1
+428  extra/libimobiledevice                1.3.0-11                        -> 1.3.0-13
+427  extra/libimobiledevice-glue           1.2.0-1                         -> 1.3.0-1
+426  extra/libinput                        1.25.0-1                        -> 1.26.1-1
+425  extra/libjpeg-turbo                   3.0.2-2                         -> 3.0.3-1
+424  extra/libjxl                          0.10.2-1                        -> 0.10.3-1
+423  extra/libkexiv2                       24.02.1-1                       -> 24.05.1-1
+422  extra/liblc3                          1.1.0-1                         -> 1.1.1-1
+421  extra/libliftoff                      0.4.1-1                         -> 0.5.0-1
+420  extra/liblsp-r3d-glx-lib              1.2.15-1                        -> 1.2.16-1
+419  extra/libmaxminddb                    1.9.1-1                         -> 1.10.0-1
+418  extra/libmediainfo                    24.03-1                         -> 24.06-1
+417  extra/libmfx                          23.2.2-2                        -> 23.2.2-3
+416  extra/libmpcdec                       1:0.1+r475-4                    -> 1:0.1+r475-5
+415  extra/libmpeg2                        0.5.1-8                         -> 0.5.1-10
+414  extra/libndp                          1.8-1                           -> 1.8-2
+413  extra/libnewt                         0.52.24-1                       -> 0.52.24-2
+412  extra/libnm                           1.46.0-2                        -> 1.48.2-1
+411  extra/libnvme                         1.8-1                           -> 1.9-1
+410  extra/libogg                          1.3.5-1                         -> 1.3.5-2
+409  extra/libopenmpt                      0.7.6-2                         -> 0.7.8-1
+408  extra/libpipewire                     1:1.0.4-4                       -> 1:1.2.0-2
+407  extra/libplacebo                      6.338.2-2                       -> 6.338.2-7
+406  extra/libplasma                       6.0.3-1                         -> 6.1.1-1
+405  extra/libplist                        2.4.0-1                         -> 2.6.0-1
+404  extra/libproxy                        0.5.4-1                         -> 0.5.7-1
+403  extra/libraw1394                      2.1.2-3                         -> 2.1.2-4
+402  extra/librsvg                         2:2.58.0-1                      -> 2:2.58.1-1
+401  extra/libsodium                       1.0.19-3                        -> 1.0.20-1
+400  extra/libsysprof-capture              46.0-1                          -> 46.0-3
+399  extra/libtiff                         4.6.0-4                         -> 4.6.0-5
+398  extra/libtorrent-rasterbar            1:2.0.9-3                       -> 1:2.0.10-2
+397  extra/libunrar                        1:7.0.7-1                       -> 1:7.0.9-1
+396  extra/libunwind                       1.8.1-1                         -> 1.8.1-3
+395  extra/libupnp                         1.14.18-1                       -> 1.14.19-2
+394  extra/libva-utils                     2.21.0-1                        -> 2.22.0-1
+393  extra/libvpl                          2.10.2-1                        -> 2.12.0-1
+392  extra/libwacom                        2.10.0-1                        -> 2.12.2-1
+391  extra/libwbclient                     4.20.0-2                        -> 4.20.2-1
+390  extra/libwebp                         1.3.2-1                         -> 1.4.0-1
+389  extra/libwireplumber                  0.5.1-1                         -> 0.5.5-1
+388  extra/libx11                          1.8.8-3                         -> 1.8.9-1
+387  extra/libxcb                          1.16.1-1                        -> 1.17.0-1
+386  extra/libxmlb                         0.3.16-1                        -> 0.3.19-1
+385  extra/libxmu                          1.2.0-1                         -> 1.2.1-1
+384  extra/libxnvctrl                      550.67-1                        -> 555.58-1
+383  extra/libxslt                         1.1.39-1                        -> 1.1.41-1
+382  extra/lilv                            0.24.24-1                       -> 0.24.24-2
+381  extra/llvm                            17.0.6-2                        -> 17.0.6-5
+380  extra/llvm-libs                       17.0.6-2                        -> 17.0.6-5
+379  extra/lsp-plugins                     1.2.15-1                        -> 1.2.16-1
+378  extra/lsp-plugins-clap                1.2.15-1                        -> 1.2.16-1
+377  extra/lsp-plugins-ladspa              1.2.15-1                        -> 1.2.16-1
+376  extra/lsp-plugins-lv2                 1.2.15-1                        -> 1.2.16-1
+375  extra/lsp-plugins-standalone          1.2.15-1                        -> 1.2.16-1
+374  extra/lsp-plugins-vst                 1.2.15-1                        -> 1.2.16-1
+373  extra/lua                             5.4.6-3                         -> 5.4.7-1
+372  extra/luajit                          2.1.1702233742-1                -> 2.1.1716656478-1
+371  extra/meld                            3.22.2-2                        -> 3.22.2-3
+370  extra/mesa                            1:24.0.4-2                      -> 1:24.1.2-1
+369  extra/meson                           1.4.0-2                         -> 1.4.1-1
+368  extra/mimalloc                        2.1.2-1                         -> 2.1.7-1
+367  extra/mobile-broadband-provider-info  20230416-1                      -> 20240407-1
+366  extra/modemmanager-qt                 6.0.0-1                         -> 6.3.0-1
+365  extra/modemmanager-qt5                5.115.0-1                       -> 5.116.0-1
+364  extra/mold                            2.30.0-1                        -> 2.32.1-1
+363  extra/mpg123                          1.32.5-1                        -> 1.32.6-1
+362  extra/mpv                             1:0.37.0-3                      -> 1:0.38.0-5
+361  extra/mtools                          1:4.0.43-1                      -> 1:4.0.44-1
+360  extra/mujs                            1.3.4-1                         -> 1.3.5-1
+359  extra/nasm                            2.16.01-1                       -> 2.16.03-1
+358  extra/netpbm                          10.86.41-1                      -> 10.86.42-1
+357  extra/networkmanager                  1.46.0-2                        -> 1.48.2-1
+356  extra/networkmanager-openvpn          1.10.2-3                        -> 1.12.0-1
+355  extra/nftables                        1:1.0.9-1                       -> 1:1.0.9-3
+354  extra/ninja                           1.11.1-3                        -> 1.12.1-1
+353  extra/nlohmann-json                   3.11.2-2                        -> 3.11.2-3
+352  extra/node-gyp                        10.1.0-2                        -> 10.1.0-3
+351  extra/nodejs-lts-hydrogen             18.18.2-2                       -> 18.20.3-1
+350  extra/noto-fonts                      1:24.4.1-1                      -> 1:24.7.1-1
+349  extra/noto-fonts-cjk                  20230817-1                      -> 20230817-2
+348  extra/noto-fonts-extra                1:24.4.1-1                      -> 1:24.7.1-1
+347  extra/npm                             10.5.1-1                        -> 10.8.1-1
+346  extra/ntp                             4.2.8.p17-1                     -> 4.2.8.p18-1
+345  extra/nvidia-dkms                     550.67-1                        -> 555.58-2
+344  extra/nvidia-utils                    550.67-1                        -> 555.58-2
+343  extra/nwg-icon-picker                 0.1.1-1                         -> 0.1.1-3
+342  extra/nwg-panel                       0.9.27-1                        -> 0.9.34-1
+341  extra/onetbb                          2021.11.0-1                     -> 2021.13.0-1
+340  extra/openal                          1.23.1-1                        -> 1.23.1-2
+339  extra/openmpi                         5.0.2-8                         -> 5.0.3-1
+338  extra/openpmix                        4.2.9-1                         -> 5.0.2-1
+337  extra/openucx                         1.15.0-2                        -> 1.17.0-1
+336  extra/openvpn                         2.6.10-1                        -> 2.6.11-1
+335  extra/opus                            1.5.1-1                         -> 1.5.2-1
+334  extra/pacman-contrib                  1.10.5-1                        -> 1.10.6-1
+333  extra/pacutils                        0.11.1-2                        -> 0.14.0-1
+332  extra/pahole                          1:1.26-1                        -> 1:1.27-1
+331  extra/pango                           1:1.52.2-1                      -> 1:1.54.0-1
+330  extra/parallel                        20240322-1                      -> 20240622-1
+329  extra/partitionmanager                24.02.1-1                       -> 24.05.1-1
+328  extra/pavucontrol                     1:5.0+r64+geba9ca6-1            -> 1:6.0-1
+327  extra/pcsclite                        2.0.3-1                         -> 2.2.3-1
+326  extra/perl-html-parser                3.81-2                          -> 3.82-1
+325  extra/perl-html-tagset                3.20-14                         -> 3.24-1
+324  extra/perl-http-message               6.45-1                          -> 6.46-1
+323  extra/perl-libwww                     6.72-1                          -> 6.77-1
+322  extra/perl-uri                        5.21-1                          -> 5.28-1
+321  extra/perl-xml-parser                 2.46-5                          -> 2.47-1
+320  extra/pipewire                        1:1.0.4-4                       -> 1:1.2.0-2
+319  extra/pipewire-alsa                   1:1.0.4-4                       -> 1:1.2.0-2
+318  extra/pipewire-audio                  1:1.0.4-4                       -> 1:1.2.0-2
+317  extra/pipewire-jack                   1:1.0.4-4                       -> 1:1.2.0-2
+316  extra/pipewire-pulse                  1:1.0.4-4                       -> 1:1.2.0-2
+315  extra/plasma-activities               6.0.3-1                         -> 6.1.1-1
+314  extra/polkit-kde-agent                6.0.3-1                         -> 6.1.1-1
+313  extra/poppler                         24.03.0-1                       -> 24.06.1-1
+312  extra/poppler-glib                    24.03.0-1                       -> 24.06.1-1
+311  extra/poppler-qt5                     24.03.0-1                       -> 24.06.1-1
+310  extra/poppler-qt6                     24.03.0-1                       -> 24.06.1-1
+309  extra/power-profiles-daemon           0.20-1                          -> 0.21-1
+308  extra/prrte                           3.0.5-2                         -> 3.0.5-3
+307  extra/pulseaudio-qt                   1.4.0-3                         -> 1.5.0-1
+306  extra/pv                              1.8.5-2                         -> 1.8.10-1
+305  extra/python-apsw                     3.43.1.0-1                      -> 3.45.2.0-2
+304  extra/python-async-timeout            4.0.3-2                         -> 4.0.3-4
+303  extra/python-babel                    2.14.0-1                        -> 2.14.0-2
+302  extra/python-beautifulsoup4           4.12.3-1                        -> 4.12.3-2
+301  extra/python-brotlicffi               1.1.0.0-1                       -> 1.1.0.0-2
+300  extra/python-cairo                    1.26.0-1                        -> 1.26.1-1
+299  extra/python-cffi                     1.16.0-1                        -> 1.16.0-2
+298  extra/python-chardet                  5.2.0-1                         -> 5.2.0-2
+297  extra/python-charset-normalizer       3.3.2-1                         -> 3.3.2-2
+296  extra/python-colorama                 0.4.6-2                         -> 0.4.6-3
+295  extra/python-contourpy                1.2.1-1                         -> 1.2.1-5
+294  extra/python-css-parser               1.0.10-1                        -> 1.0.10-2
+293  extra/python-cssselect                1.2.0-4                         -> 1.2.0-6
+292  extra/python-cycler                   0.12.1-1                        -> 0.12.1-2
+291  extra/python-dasbus                   1.7-1                           -> 1.7-3
+290  extra/python-dateutil                 2.9.0-3                         -> 2.9.0-5
+289  extra/python-defusedxml               0.7.1-5                         -> 0.7.1-6
+288  extra/python-dnspython                1:2.5.0-1                       -> 1:2.6.1-1
+287  extra/python-docutils                 1:0.20.1-2                      -> 1:0.21.2-1
+286  extra/python-faust-cchardet           2.1.19-1                        -> 2.1.19-2
+285  extra/python-feedparser               6.0.11-1                        -> 6.0.11-2
+284  extra/python-fonttools                4.50.0-1                        -> 4.53.0-1
+283  extra/python-future                   0.18.3-2                        -> 1.0.0-1
+282  extra/python-gobject                  3.48.1-2                        -> 3.48.2-1
+281  extra/python-html2text                2020.1.16-9                     -> 2024.2.26-1
+280  extra/python-html5-parser             0.4.11-1                        -> 0.4.12-2
+279  extra/python-html5lib                 1.1-13                          -> 1.1-14
+278  extra/python-httplib2                 0.22.0-4                        -> 0.22.0-5
+277  extra/python-i3ipc                    2.2.1-4                         -> 2.2.1-6
+276  extra/python-idna                     3.6-1                           -> 3.7-1
+275  extra/python-ifaddr                   0.2.0-3                         -> 0.2.0-5
+274  extra/python-inflate64                1.0.0-1                         -> 1.0.0-2
+273  extra/python-iniconfig                2.0.0-4                         -> 2.0.0-5
+272  extra/python-jeepney                  0.8.0-2                         -> 0.8.0-3
+271  extra/python-kiwisolver               1.4.5-2                         -> 1.4.5-3
+270  extra/python-lxml                     5.1.0-1                         -> 5.2.2-1
+269  extra/python-mako                     1.3.2-1                         -> 1.3.5-1
+268  extra/python-markdown                 3.6-2                           -> 3.6-3
+267  extra/python-markupsafe               2.1.5-1                         -> 2.1.5-2
+266  extra/python-matplotlib               3.8.3-1                         -> 3.8.4-2
+265  extra/python-mechanize                1:0.4.8-2                       -> 1:0.4.10-1
+264  extra/python-msgpack                  1.0.5-1                         -> 1.0.5-2
+263  extra/python-multivolumefile          0.2.3-6                         -> 0.2.3-7
+262  extra/python-netifaces                0.11.0-4                        -> 0.11.0-5
+261  extra/python-numpy                    1.26.4-1                        -> 2.0.0-1
+260  extra/python-packaging                23.2-1                          -> 24.0-1
+259  extra/python-pdftotext                2.2.2-4                         -> 2.2.2-6
+258  extra/python-pillow                   10.2.0-2                        -> 10.4.0-1
+257  extra/python-pluggy                   1.4.0-2                         -> 1.5.0-1
+256  extra/python-ply                      3.11-12                         -> 3.11-13
+255  extra/python-psutil                   5.9.8-1                         -> 5.9.8-4
+254  extra/python-py7zr                    0.21.0-1                        -> 0.21.1-1
+253  extra/python-pyaml                    23.12.0-1                       -> 23.12.0-2
+252  extra/python-pybcj                    1.0.2-1                         -> 1.0.2-2
+251  extra/python-pychm                    0.8.6-7                         -> 0.8.6-8
+250  extra/python-pycparser                2.22-1                          -> 2.22-2
+249  extra/python-pycryptodome             3.20.0-1                        -> 3.20.0-2
+248  extra/python-pycryptodomex            3.12.0-2                        -> 3.20.0-1
+247  extra/python-pydbus                   0.6.0-10                        -> 0.6.0-11
+246  extra/python-pygments                 2.17.2-1                        -> 2.18.0-1
+245  extra/python-pyparsing                3.1.2-1                         -> 3.1.2-2
+244  extra/python-pyppmd                   1.1.0-1                         -> 1.1.0-2
+243  extra/python-pyqt5                    5.15.10-1                       -> 5.15.10-2
+242  extra/python-pyqt5-sip                12.13.0-1                       -> 12.13.0-2
+241  extra/python-pyqt6                    6.6.1-3                         -> 6.7.0-4
+240  extra/python-pyqt6-sip                13.6.0-1                        -> 13.6.0-2
+239  extra/python-pyqt6-webengine          6.6.0-1                         -> 6.7.0-2
+238  extra/python-pytest                   1:8.1.1-1                       -> 1:8.2.2-1
+237  extra/python-pytz                     2024.1-1                        -> 2024.1-2
+236  extra/python-pyzstd                   0.15.10-2                       -> 0.16.0-2
+235  extra/python-regex                    2023.12.25-1                    -> 2024.5.15-1
+234  extra/python-requests                 2.31.0-1                        -> 2.32.3-1
+233  extra/python-sgmllib3k                1.0.0-5                         -> 1.0.0-6
+232  extra/python-shtab                    1.6.5-1                         -> 1.7.1-1
+231  extra/python-six                      1.16.0-8                        -> 1.16.0-9
+230  extra/python-soupsieve                2.5-1                           -> 2.5-3
+229  extra/python-termcolor                2.4.0-1                         -> 2.4.0-2
+228  extra/python-texttable                1.7.0-1                         -> 1.7.0-2
+227  extra/python-tqdm                     4.66.2-1                        -> 4.66.4-1
+226  extra/python-typing_extensions        4.10.0-1                        -> 4.12.2-1
+225  extra/python-ujson                    5.9.0-1                         -> 5.10.0-1
+224  extra/python-unrardll                 0.1.7-1                         -> 0.1.7-2
+223  extra/python-urllib3                  1.26.18-1                       -> 1.26.18-3
+222  extra/python-webencodings             0.5.1-10                        -> 0.5.1-11
+221  extra/python-xlib                     0.33-2                          -> 0.33-3
+220  extra/python-xxhash                   3.4.1-1                         -> 3.4.1-3
+219  extra/python-yaml                     6.0.1-2                         -> 6.0.1-4
+218  extra/python-zeroconf                 0.63.0-1                        -> 0.63.0-2
+217  extra/qca-qt5                         2.3.8-2                         -> 2.3.9-1
+216  extra/qca-qt6                         2.3.8-2                         -> 2.3.9-1
+215  extra/qpdf                            11.9.0-1                        -> 11.9.1-1
+214  extra/qqc2-desktop-style              6.0.0-1                         -> 6.3.0-1
+213  extra/qqc2-desktop-style5             5.115.0-1                       -> 5.116.1-1
+212  extra/qt5-base                        5.15.13+kde+r142-1              -> 5.15.14+kde+r141-1
+211  extra/qt5-charts                      5.15.13-1                       -> 5.15.14-1
+210  extra/qt5-declarative                 5.15.13+kde+r30-1               -> 5.15.14+kde+r28-1
+209  extra/qt5-graphicaleffects            5.15.13-1                       -> 5.15.14-1
+208  extra/qt5-imageformats                5.15.13+kde+r7-1                -> 5.15.14+kde+r7-1
+207  extra/qt5-multimedia                  5.15.13+kde+r2-1                -> 5.15.14+kde+r2-1
+206  extra/qt5-quickcontrols               5.15.13-1                       -> 5.15.14-1
+205  extra/qt5-quickcontrols2              5.15.13+kde+r5-1                -> 5.15.14+kde+r5-1
+204  extra/qt5-speech                      5.15.13+kde+r1-1                -> 5.15.14+kde+r1-1
+203  extra/qt5-svg                         5.15.13+kde+r6-1                -> 5.15.14+kde+r5-1
+202  extra/qt5-tools                       5.15.13+kde+r4-1                -> 5.15.14+kde+r4-1
+201  extra/qt5-translations                5.15.13-1                       -> 5.15.14-1
+200  extra/qt5-wayland                     5.15.13+kde+r60-1               -> 5.15.14+kde+r58-1
+199  extra/qt5-x11extras                   5.15.13-1                       -> 5.15.14-1
+198  extra/qt5-xmlpatterns                 5.15.13-1                       -> 5.15.14-1
+197  extra/qt6-5compat                     6.6.3-1                         -> 6.7.2-1
+196  extra/qt6-base                        6.6.3-1                         -> 6.7.2-1
+195  extra/qt6-declarative                 6.6.3-1                         -> 6.7.2-1
+194  extra/qt6-imageformats                6.6.3-1                         -> 6.7.2-1
+193  extra/qt6-multimedia                  6.6.3-1                         -> 6.7.2-1
+192  extra/qt6-multimedia-ffmpeg           6.6.3-1                         -> 6.7.2-1
+191  extra/qt6-positioning                 6.6.3-1                         -> 6.7.2-1
+190  extra/qt6-shadertools                 6.6.3-1                         -> 6.7.2-1
+189  extra/qt6-speech                      6.6.3-1                         -> 6.7.2-1
+188  extra/qt6-svg                         6.6.3-1                         -> 6.7.2-1
+187  extra/qt6-tools                       6.6.3-1                         -> 6.7.2-1
+186  extra/qt6-translations                6.6.3-1                         -> 6.7.2-1
+185  extra/qt6-wayland                     6.6.3-1                         -> 6.7.2-1
+184  extra/qt6-webchannel                  6.6.3-1                         -> 6.7.2-1
+183  extra/qt6-webengine                   6.6.3-1                         -> 6.7.2-1
+182  extra/qt6ct                           0.9-6                           -> 0.9-9
+181  extra/qt6pas                          6.2.7-1                         -> 6.2.7-2
+180  extra/qtractor                        0.9.39-3                        -> 0.9.39-4
+179  extra/raptor                          2.0.16-4                        -> 2.0.16-5
+178  extra/re2                             1:20240401-1                    -> 1:20240601-1
+177  extra/rebuild-detector                4.4.3-2                         -> 4.4.3-3
+176  extra/reflector                       2023-1                          -> 2023-2
+175  extra/rnnoise                         0.4.1-1                         -> 1:0.2-1
+174  extra/rsync                           3.2.7-6                         -> 3.3.0-2
+173  extra/ruby-bundler                    2.5.4-1                         -> 2.5.11-1
+172  extra/rustup                          1.27.0-1                        -> 1.27.1-1
+171  extra/sdl2                            2.30.2-1                        -> 2.30.4-1
+170  extra/semver                          7.6.0-1                         -> 7.6.2-1
+169  extra/shaderc                         2023.8-1                        -> 2024.1-1
+168  extra/smbclient                       4.20.0-2                        -> 4.20.2-1
+167  extra/sndio                           1.9.0-1                         -> 1.9.0-2
+166  extra/socat                           1.8.0.0-1                       -> 1.8.0.0-2
+165  extra/solid                           6.0.0-1                         -> 6.3.0-1
+164  extra/solid5                          5.115.0-1                       -> 5.116.0-1
+163  extra/sonnet                          6.0.0-1                         -> 6.3.0-1
+162  extra/sonnet5                         5.115.0-1                       -> 5.116.0-1
+161  extra/soundtouch                      2.3.2-1                         -> 2.3.3-1
+160  extra/spdlog                          1.13.0-1                        -> 1.14.1-1
+159  extra/spirv-tools                     2023.6-1                        -> 2024.2-1
+158  extra/svt-av1                         2.0.0-1                         -> 2.1.0-1
+157  extra/swappy                          1.5.1-1                         -> 1.5.1-2
+156  extra/swig                            4.1.1-2                         -> 4.2.1-3
+155  extra/swww                            0.9.1-1                         -> 0.9.5-2
+154  extra/syndication                     6.0.0-1                         -> 6.3.0-1
+153  extra/syndication5                    5.115.0-1                       -> 5.116.0-1
+152  extra/syntax-highlighting             6.0.0-2                         -> 6.3.0-1
+151  extra/syntax-highlighting5            5.115.0-2                       -> 5.116.0-1
+150  extra/sysfsutils                      2.1.1-1                         -> 2.1.1-2
+149  extra/systemsettings                  6.0.3-1                         -> 6.1.1-1
+148  extra/taglib                          2.0-1                           -> 2.0.1-1
+147  extra/talloc                          2.4.2-1                         -> 2.4.2-3
+146  extra/tcl                             8.6.14-3                        -> 8.6.14-4
+145  extra/tdb                             1.4.10-2                        -> 1.4.10-3
+144  extra/tevent                          1:0.16.1-2                      -> 1:0.16.1-3
+143  extra/thunar                          4.18.10-1                       -> 4.18.10-2
+142  extra/tldr                            3.2.0-1                         -> 3.2.0-3
+141  extra/tracker3                        3.7.1-2                         -> 3.7.3-2
+140  extra/twolame                         0.4.0-3                         -> 0.4.0-4
+139  extra/unrar                           1:7.0.7-1                       -> 1:7.0.9-1
+138  extra/unzip                           6.0-20                          -> 6.0-21
+137  extra/upower                          1.90.2-1                        -> 1.90.4-1
+136  extra/vapoursynth                     R66-1                           -> R68-1
+135  extra/vim                             9.1.0252-1                      -> 9.1.0496-1
+134  extra/vim-runtime                     9.1.0252-1                      -> 9.1.0496-1
+133  extra/vlc                             3.0.20-8                        -> 3.0.21-1
+132  extra/volume_key                      0.3.12-8                        -> 0.3.12-9
+131  extra/vpnc                            1:0.5.3.r526.r213-1             -> 1:0.5.3.r539.r239-1
+130  extra/vulkan-headers                  1:1.3.279-1                     -> 1:1.3.285-1
+129  extra/vulkan-icd-loader               1.3.279-1                       -> 1.3.285-1
+128  extra/vulkan-radeon                   1:24.0.4-2                      -> 1:24.1.2-1
+127  extra/wasi-compiler-rt                17.0.6-1                        -> 17.0.6-2
+126  extra/wasi-libc                       1:0+352+c5264e2b-1              -> 1:0+374+9e8c5423-1
+125  extra/waybar                          0.10.0-3                        -> 0.10.3-1
+124  extra/wayland                         1.22.0-1                        -> 1.23.0-1
+123  extra/wayland-protocols               1.34-1                          -> 1.36-1
+122  extra/webkit2gtk                      2.44.0-1                        -> 2.44.2-1
+121  extra/webkit2gtk-4.1                  2.44.0-1                        -> 2.44.2-1
+120  extra/weston                          13.0.0-2                        -> 13.0.1-1
+119  extra/wget                            1.24.5-1                        -> 1.24.5-3
+118  extra/wildmidi                        0.4.5-2                         -> 0.4.6-1
+117  extra/wine-mono                       9.0.0-1                         -> 9.2.0-1
+116  extra/wireplumber                     0.5.1-1                         -> 0.5.5-1
+115  extra/wlr-randr                       0.4.0-1                         -> 0.4.1-4
+114  extra/wlroots                         0.17.2-1                        -> 0.17.4-1
+113  extra/woff2                           1.0.2-4                         -> 1.0.2-5
+112  extra/wxwidgets-common                3.2.4-4                         -> 3.2.5-1
+111  extra/wxwidgets-gtk3                  3.2.4-4                         -> 3.2.5-1
+110  extra/x264                            3:0.164.r3108.31e19f9-1         -> 3:0.164.r3108.31e19f9-2
+109  extra/x265                            3.5-3                           -> 3.6-1
+108  extra/xcb-proto                       1.16.0-1                        -> 1.17.0-2
+107  extra/xdg-desktop-portal              1.18.2-1                        -> 1.18.4-1
+106  extra/xdg-desktop-portal-hyprland     1.3.1-6                         -> 1.3.2-1
+105  extra/xkeyboard-config                2.41-1                          -> 2.42-1
+104  extra/xmlsec                          1.3.3-2                         -> 1.3.4-1
+103  extra/xorg-server                     21.1.12-1                       -> 21.1.13-1
+102  extra/xorg-server-common              21.1.12-1                       -> 21.1.13-1
+101  extra/xorg-server-xvfb                21.1.12-1                       -> 21.1.13-1
+100  extra/xorg-xwayland                   23.2.5-1                        -> 24.1.0-1
+ 99  extra/xterm                           390-1                           -> 392-1
+ 98  extra/zam-plugins                     4.2-1                           -> 4.3-1
+ 97  extra/zam-plugins-clap                4.2-1                           -> 4.3-1
+ 96  extra/zam-plugins-ladspa              4.2-1                           -> 4.3-1
+ 95  extra/zam-plugins-lv2                 4.2-1                           -> 4.3-1
+ 94  extra/zam-plugins-standalone          4.2-1                           -> 4.3-1
+ 93  extra/zam-plugins-vst                 4.2-1                           -> 4.3-1
+ 92  extra/zam-plugins-vst3                4.2-1                           -> 4.3-1
+ 91  extra/zbar                            0.23.90-3                       -> 0.23.93-1
+ 90  multilib/lib32-alsa-lib               1.2.11-1                        -> 1.2.12-1
+ 89  multilib/lib32-alsa-plugins           1.2.7.1-2                       -> 1.2.12-1
+ 88  multilib/lib32-curl                   8.7.1-4                         -> 8.8.0-1
+ 87  multilib/lib32-e2fsprogs              1.47.0-1                        -> 1.47.1-1
+ 86  multilib/lib32-fribidi                1.0.13-2                        -> 1.0.15-1
+ 85  multilib/lib32-gdk-pixbuf2            2.42.10-2                       -> 2.42.12-1
+ 84  multilib/lib32-gettext                0.22.4-1                        -> 0.22.5-1
+ 83  multilib/lib32-glib2                  2.80.0-1                        -> 2.80.3-1
+ 82  multilib/lib32-gnutls                 3.8.4-1                         -> 3.8.5-1
+ 81  multilib/lib32-gst-plugins-base       1.24.1-1                        -> 1.24.5-1
+ 80  multilib/lib32-gst-plugins-base-libs  1.24.1-1                        -> 1.24.5-1
+ 79  multilib/lib32-gst-plugins-good       1.24.1-1                        -> 1.24.5-1
+ 78  multilib/lib32-gstreamer              1.24.1-1                        -> 1.24.5-1
+ 77  multilib/lib32-gtk3                   1:3.24.41-1                     -> 1:3.24.42-1
+ 76  multilib/lib32-harfbuzz               8.4.0-1                         -> 9.0.0-1
+ 75  multilib/lib32-icu                    74.2-1                          -> 75.1-1
+ 74  multilib/lib32-libcap                 2.69-1                          -> 2.70-1
+ 73  multilib/lib32-libcups                2.4.7-1                         -> 2.4.10-1
+ 72  multilib/lib32-libgcrypt              1.10.3-1                        -> 1.11.0-1
+ 71  multilib/lib32-libgpg-error           1.48-1                          -> 1.49-1
+ 70  multilib/lib32-libjpeg-turbo          3.0.2-2                         -> 3.0.3-1
+ 69  multilib/lib32-libldap                2.6.7-1                         -> 2.6.8-1
+ 68  multilib/lib32-libltdl                2.4.7-3                         -> 2.5.0+1+g38c166c8-1
+ 67  multilib/lib32-libnghttp2             1.60.0-1                        -> 1.62.1-1
+ 66  multilib/lib32-libnghttp3             1.2.0-1                         -> 1.4.0-1
+ 65  multilib/lib32-libpciaccess           0.18-1                          -> 0.18.1-1
+ 64  multilib/lib32-libpipewire            1:1.0.4-1                       -> 1:1.2.0-1
+ 63  multilib/lib32-libproxy               0.5.4-1                         -> 0.5.7-1
+ 62  multilib/lib32-libpsl                 0.21.2-1                        -> 0.21.5-1
+ 61  multilib/lib32-librsvg                2:2.58.0-1                      -> 2:2.58.1-1
+ 60  multilib/lib32-libtasn1               4.19.0-1                        -> 4.19.0-2
+ 59  multilib/lib32-libx11                 1.8.7-1                         -> 1.8.9-1
+ 58  multilib/lib32-libxcb                 1.16.1-1                        -> 1.17.0-1
+ 57  multilib/lib32-libxml2                2.12.6-1                        -> 2.13.1-1
+ 56  multilib/lib32-mesa                   1:24.0.4-2                      -> 1:24.1.2-1
+ 55  multilib/lib32-mpg123                 1.32.5-1                        -> 1.32.6-1
+ 54  multilib/lib32-ncurses                6.4_20230520-1                  -> 6.5-1
+ 53  multilib/lib32-nettle                 3.9.1-1                         -> 3.10-1
+ 52  multilib/lib32-nspr                   4.35-2                          -> 4.35-3
+ 51  multilib/lib32-nss                    3.99-1                          -> 3.101.1-1
+ 50  multilib/lib32-openssl                1:3.2.1-1                       -> 1:3.3.1-1
+ 49  multilib/lib32-opus                   1.5.1-1                         -> 1.5.2-1
+ 48  multilib/lib32-pam                    1.6.0-1                         -> 1.6.1-1
+ 47  multilib/lib32-pango                  1:1.52.2-1                      -> 1:1.54.0-1
+ 46  multilib/lib32-pcre2                  10.43-1                         -> 10.44-1
+ 45  multilib/lib32-pipewire               1:1.0.4-1                       -> 1:1.2.0-1
+ 44  multilib/lib32-pipewire-jack          1:1.0.4-1                       -> 1:1.2.0-1
+ 43  multilib/lib32-sdl2                   2.30.2-1                        -> 2.30.4-1
+ 42  multilib/lib32-sqlite                 3.45.2-1                        -> 3.46.0-1
+ 41  multilib/lib32-systemd                255.4-1                         -> 256.1-1
+ 40  multilib/lib32-taglib                 2.0-2                           -> 2.0.1-1
+ 39  multilib/lib32-tdb                    1.4.9-1                         -> 1.4.10-1
+ 38  multilib/lib32-util-linux             2.40-2                          -> 2.40.1-1
+ 37  multilib/lib32-vulkan-radeon          1:24.0.4-2                      -> 1:24.1.2-1
+ 36  multilib/lib32-xz                     5.6.1-3                         -> 5.6.2-1
+ 35  multilib/lib32-zstd                   1.5.5-1                         -> 1.5.6-1
+ 34  multilib/steam                        1.0.0.79-1                      -> 1.0.0.79-2
+ 33  multilib/wine                         9.5-1                           -> 9.12-1
+ 32  rumpowered/dwarfs                     0.9.6-1                         -> 0.10.1-3
+ 31  aur/awakened-poe-trade-bin            3.24.10001-1                    -> 3.25.102-1
+ 30  aur/balena-etcher                     2:1.18.14-1                     -> 2:1.19.25-3
+ 29  aur/brave-bin                         1:1.64.116-1                    -> 1:1.73.91-1
+ 28  aur/cava-git                          r910.c5d36aa-1                  -> r957.395b36e-6
+ 27  aur/electron25                        25.9.8-5                        -> 25.9.8-6
+ 26  aur/electron26-bin                    26.6.10-1                       -> 26.6.10-3
+ 25  aur/gamescope-git                     3.14.0.r6.g9e46c89-1            -> 3.15.9.r21.g7dd1bcd9-2
+ 24  aur/genymotion                        3.6.0-2                         -> 3.8.0-1
+ 23  aur/google-chrome                     123.0.6312.105-1                -> 131.0.6778.85-1
+ 22  aur/hyprpicker-git                    0.2.0.r6.0eb4919-1              -> 0.4.1.r1.4411a6d-1
+ 21  aur/libpdfium-nojs                    6261.r0.4c4f9ab25d-1            -> 6778.r0.7a8409531f-1
+ 20  aur/mangohud-git                      0.7.1.r24.ga7a73af-1            -> 0.7.2.r13.g41b8761-1
+ 19  aur/megasync-bin                      5.2.0-2                         -> 5.6.1-1
+ 18  aur/mpv-mpris-git                     1.1.1.g16fee38-1                -> 1.1.1.g16fee38-2
+ 17  aur/mpvpaper                          1.4-1                           -> 1.7-1
+ 16  aur/nvm                               0.39.7-1                        -> 0.40.1-1
+ 15  aur/oh-my-zsh-git                     r7064.0a9d82780-1               -> r7424.c690f7316-1
+ 14  aur/path-of-building-community-git    2.38.4.r7653.62.517-1           -> 2.47.3.r8155.62.517-1
+ 13  aur/pistol-git                        0.4.2.r8.ge3c4ec3-1             -> 0.4.2.r10.g5e71fe6-1
+ 12  aur/qbittorrent-git                   1:5.0.0alpha1.r266.g4ba8eaf4b-1 -> 1:5.1.0alpha1.r306.gb462a2bf0-1
+ 11  aur/rofi-lbonn-wayland-git            1.7.5.wayland2.r154.g36621af0-1 -> 1.7.5.wayland3.r50.g2baa809d-1
+ 10  aur/safeeyes-git                      2.1.6.r22.g3e89aa4-1            -> 2.2.2.r42.g47be152-1
+  9  aur/sddm-git                          0.21.0.14.gae072f9-3            -> 0.21.0.14.gae072f9-4
+  8  aur/spicetify-cli                     2.36.2-1                        -> 2.38.4-2
+  7  aur/spotify                           1:1.2.26.1187-1                 -> 1:1.2.50.335-1
+  6  aur/swaylock-effects-git              r469.4f2234c-1                  -> r470.496059a-1
+  5  aur/timer-rs-bin                      0.6.0-2                         -> 0.7.3-1
+  4  aur/velocidrone                       1.17.0-1                        -> 1.17.1-3
+  3  aur/ventoy                            1.0.97-2                        -> 1.0.99-3
+  2  aur/whatsapp-for-linux                1.6.4-1                         -> 1.7.0-1
+  1  aur/wlogout                           1.2.1-1                         -> 1.2.2-0
+==> Packages to exclude: (eg: "1 2 3", "1-3", "^4" or repo name)
+ -> Excluding packages may cause partial upgrades and break systems
+==> 
+
+
+ -> could not find all required packages: electron33 
+
+
+ ---------------------------------
+
+ ❯ eos-update --aur
+
+eos-update: package updater with additional features
+Updating native and AUR apps...
+[sudo] password for n30: 
+:: Synchronizing package databases...
+ endeavouros is up to date
+ core is up to date
+ extra is up to date
+ multilib is up to date
+ rumpowered is up to date
+:: Starting full system upgrade...
+:: Replace dbus-python with extra/python-dbus? [Y/n] 
+:: Replace mlocate with extra/plocate? [Y/n] 
+:: Replace ruby-abbrev with extra/ruby? [Y/n] 
+:: Replace ruby-base64 with extra/ruby? [Y/n] 
+:: Replace ruby-benchmark with extra/ruby? [Y/n] 
+:: Replace ruby-bigdecimal with extra/ruby? [Y/n] 
+:: Replace ruby-bundledgems with extra/ruby-bundled-gems? [Y/n] 
+:: Replace ruby-cgi with extra/ruby? [Y/n] 
+:: Replace ruby-csv with extra/ruby? [Y/n] 
+:: Replace ruby-date with extra/ruby? [Y/n] 
+:: Replace ruby-delegate with extra/ruby? [Y/n] 
+:: Replace ruby-did_you_mean with extra/ruby? [Y/n] 
+:: Replace ruby-digest with extra/ruby? [Y/n] 
+:: Replace ruby-drb with extra/ruby? [Y/n] 
+:: Replace ruby-english with extra/ruby? [Y/n] 
+:: Replace ruby-etc with extra/ruby? [Y/n] 
+:: Replace ruby-fcntl with extra/ruby? [Y/n] 
+:: Replace ruby-fiddle with extra/ruby? [Y/n] 
+:: Replace ruby-fileutils with extra/ruby? [Y/n] 
+:: Replace ruby-find with extra/ruby? [Y/n] 
+:: Replace ruby-forwardable with extra/ruby? [Y/n] 
+:: Replace ruby-getoptlong with extra/ruby? [Y/n] 
+:: Replace ruby-io-console with extra/ruby? [Y/n] 
+:: Replace ruby-io-nonblock with extra/ruby? [Y/n] 
+:: Replace ruby-io-wait with extra/ruby? [Y/n] 
+:: Replace ruby-ipaddr with extra/ruby? [Y/n] 
+:: Replace ruby-json with extra/ruby? [Y/n] 
+:: Replace ruby-logger with extra/ruby? [Y/n] 
+:: Replace ruby-mutex_m with extra/ruby? [Y/n] 
+:: Replace ruby-net-http with extra/ruby? [Y/n] 
+:: Replace ruby-open-uri with extra/ruby? [Y/n] 
+:: Replace ruby-psych with extra/ruby? [Y/n] 
+:: Replace ruby-reline with extra/ruby? [Y/n] 
+:: Replace ruby-ruby2_keywords with extra/ruby? [Y/n] 
+:: Replace ruby-stringio with extra/ruby? [Y/n] 
+:: Replace ruby-time with extra/ruby? [Y/n] 
+:: Replace ruby-tmpdir with extra/ruby? [Y/n] 
+:: Replace ruby-uri with extra/ruby? [Y/n] 
+:: Replace tracker3 with extra/tinysparql? [Y/n] 
+resolving dependencies...
+
+
+looking for conflicting packages...
+
+error: failed to prepare transaction (could not satisfy dependencies)
+:: installing pipewire-pulse (1:1.2.6-1) breaks dependency 'pulseaudio' required by cava-git
+:: installing icu (75.1-1) breaks dependency 'libicui18n.so=74-64' required by electron25
+:: installing icu (75.1-1) breaks dependency 'libicuuc.so=74-64' required by electron25
+:: installing jsoncpp (1.9.6-3) breaks dependency 'libjsoncpp.so=25-64' required by electron25
+:: installing libdisplay-info (0.2.0-2) breaks dependency 'libdisplay-info.so=1-64' required by gamescope-git
+:: installing ffmpeg (2:7.1-2) breaks dependency 'libavformat.so=60-64' required by mpv-mpris-git
+
+
+--------------
+ :: PGP keys need importing:
+ -> 53E6B47B45CEA3E0D5B7457758D0EE648A48B3BB, required by: kpeople5  kfilemetadata5  modemmanager-qt5
+ -> 63CBEEC9006602088F9B19326224F9941A8AA6D1, required by: spotify
+:: Import? [Y/n] 
+:: Importing keys with gpg...
+gpg: keyserver receive failed: Server indicated a failure
+ -> problem importing keys
+
+
+ ------------------------------
+
+Enter a number (default=1): 
+looking for conflicting packages...
+error: failed to prepare transaction (could not satisfy dependencies)
+:: installing pipewire-pulse (1:1.2.6-1) breaks dependency 'pulseaudio' required by cava-git
+:: installing icu (75.1-1) breaks dependency 'libicui18n.so=74-64' required by electron25
+:: installing icu (75.1-1) breaks dependency 'libicuuc.so=74-64' required by electron25
+:: installing jsoncpp (1.9.6-3) breaks dependency 'libjsoncpp.so=25-64' required by electron25
+:: installing libdisplay-info (0.2.0-2) breaks dependency 'libdisplay-info.so=1-64' required by gamescope-git
+:: installing ffmpeg (2:7.1-2) breaks dependency 'libavformat.so=60-64' required by mpv-mpris-git
+ -> error installing repo packages
+error installing repo packages
+
+wayland-server
+
+------------------
+error: failed to prepare transaction (could not satisfy dependencies)
+:: installing icu (75.1-1) breaks dependency 'libicui18n.so=74-64' required by electron25
+:: installing icu (75.1-1) breaks dependency 'libicuuc.so=74-64' required by electron25
+:: installing jsoncpp (1.9.6-3) breaks dependency 'libjsoncpp.so=25-64' required by electron25
+:: installing libdisplay-info (0.2.0-2) breaks dependency 'libdisplay-info.so=1-64' required by gamescope-git
+:: installing ffmpeg (2:7.1-2) breaks dependency 'libavformat.so=60-64' required by mpv-mpris-git
+ -> error installing repo packages
+error installing repo packages
+
+---------------------------------
