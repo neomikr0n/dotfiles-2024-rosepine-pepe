@@ -3,7 +3,7 @@
         "bass_enhancer#0": {
             "amount": 3.500000000000005,
             "blend": -10.0,
-            "bypass": true,
+            "bypass": false,
             "floor": 20.0,
             "floor-active": false,
             "harmonics": 8.5,
@@ -297,8 +297,8 @@
             "equalizer#1",
             "bass_enhancer#1",
             "bass_enhancer#0",
-            "crossfeed#0",
             "reverb#0",
+            "crossfeed#0",
             "maximizer#0",
             "limiter#0"
         ],
