@@ -1,2 +1,5 @@
 2024-11-26 14:32:40.116 [info] update#setState disabled
 2024-11-26 14:32:40.119 [info] update#ctor - updates are disabled as there is no update URL
+2024-11-26 21:52:10.230 [error] [UtilityProcess type: shared-process, pid: 2518]: crashed with code 15 and reason 'killed'
+2024-11-26 21:52:10.234 [error] [UtilityProcess id: 1, type: fileWatcher, pid: 2519]: crashed with code 15 and reason 'killed'
+2024-11-26 21:52:10.245 [error] CodeWindow: renderer process gone (reason: clean-exit, code: <unknown>)

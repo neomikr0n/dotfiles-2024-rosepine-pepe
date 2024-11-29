@@ -1,5 +1,7 @@
+audio.sync_bitrate_enumeration=4
 audio.crossfade_v2=true
 audio.play_bitrate_non_metered_migrated=true
+connect.dial_devices="[]"
 video.subtitles="en-US"
-audio.play_bitrate_enumeration=4
 audio.play_bitrate_non_metered_enumeration=4
+audio.play_bitrate_enumeration=4

@@ -1,0 +1,33 @@
+2024-11-28 16:15:58.928 [info] Extension host with pid 3116 started
+2024-11-28 16:15:58.928 [info] Skipping acquiring lock for /home/n30/.config/Code - OSS/User/workspaceStorage/ce82f6cc5b8f3bff4d642450f5af7137.
+2024-11-28 16:15:58.953 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-11-28 16:15:58.976 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2024-11-28 16:15:58.977 [info] ExtensionService#_doActivateExtension s-nlf-fh.glassit, startup: true, activationEvent: '*'
+2024-11-28 16:15:59.028 [error] Activating extension s-nlf-fh.glassit failed due to an error:
+2024-11-28 16:15:59.028 [error] Error: Command failed: xprop -id 0x2200002 _NET_WM_PID
+X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  20 (X_GetProperty)
+  Resource id in failed request:  0x2200002
+  Serial number of failed request:  13
+  Current serial number in output stream:  13
+
+	at checkExecSyncError (node:child_process:900:11)
+	at Object.execSync (node:child_process:972:15)
+	at Object.execSync (node:electron/js2c/node_init:2:12720)
+	at activate (/home/n30/.vscode-oss/extensions/s-nlf-fh.glassit-0.2.3-universal/extension.js:61:37)
+	at j.ib (/usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:156:13251)
+	at j.hb (/usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:156:12964)
+	at /usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:156:11089
+	at async u.n (/usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:140:6255)
+	at async u.m (/usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:140:6218)
+	at async u.l (/usr/lib/code/out/vs/workbench/api/node/extensionHostProcess.js:140:5675)
+2024-11-28 16:15:59.029 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2024-11-28 16:15:59.047 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-11-28 16:15:59.069 [info] Eager extensions activated
+2024-11-28 16:15:59.076 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-11-28 16:15:59.077 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-11-28 16:15:59.081 [info] ExtensionService#_doActivateExtension Equinusocio.vsc-material-theme, startup: false, activationEvent: 'onStartupFinished'
+2024-11-28 16:15:59.086 [info] ExtensionService#_doActivateExtension equinusocio.vsc-material-theme-icons, startup: false, activationEvent: 'onStartupFinished'
+2024-11-28 19:26:10.462 [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:markdown'
+2024-11-28 19:26:10.468 [info] ExtensionService#_doActivateExtension vscode.markdown-language-features, startup: false, activationEvent: 'onLanguage:markdown'
+2024-11-28 19:26:10.723 [info] ExtensionService#_doActivateExtension vscode.markdown-math, startup: false, activationEvent: 'api', root cause: vscode.markdown-language-features

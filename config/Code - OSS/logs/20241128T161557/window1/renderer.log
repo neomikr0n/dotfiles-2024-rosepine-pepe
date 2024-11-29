@@ -1,0 +1,7 @@
+2024-11-28 16:15:58.733 [info] Started local extension host with pid 3116.
+2024-11-28 16:15:59.027 [error] [Extension Host] X Error of failed request:  BadWindow (invalid Window parameter)
+  Major opcode of failed request:  20 (X_GetProperty)
+  Resource id in failed request:  0x2200002
+  Serial number of failed request:  13
+  Current serial number in output stream:  13
+2024-11-28 16:16:01.408 [info] [perf] Render performance baseline is 17ms

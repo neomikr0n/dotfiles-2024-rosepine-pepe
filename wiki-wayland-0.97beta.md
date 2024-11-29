@@ -504,6 +504,21 @@ To disable autostart of Solaar, remove `/etc/xdg/autostart/solaar.desktop`.
 
 `paste_actions` set it to filter and dont define a filter.
 
+---
+> # [GRUB]()
+
+---
+Grab the menu entry
+fgrep menuentry /boot/grub/grub.cfg
+wich is: "EndeavourOS Linux"
+
+copy to GRUB_DEFAULT="EndeavourOS Linux" on:
+sudo nano -B /etc/default/grub
+
+time to rebuild:
+sudo grub-mkconfig
+OR???????
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 ---
 > # [plymouth](https://www.freedesktop.org/wiki/Software/Plymouth/)
@@ -8018,3 +8033,12 @@ error: failed to prepare transaction (could not satisfy dependencies)
 error installing repo packages
 
 ---------------------------------
+
+sudo pacman -S wlroots hyprland
+
+error: failed to prepare transaction (could not satisfy dependencies)
+:: installing icu (75.1-1) breaks dependency 'libicui18n.so=74-64' required by electron25
+:: installing icu (75.1-1) breaks dependency 'libicuuc.so=74-64' required by electron25
+:: installing jsoncpp (1.9.6-3) breaks dependency 'libjsoncpp.so=25-64' required by electron25
+:: installing ffmpeg (2:7.1-2) breaks dependency 'libavformat.so=60-64' required by mpv-mpris-git
+
